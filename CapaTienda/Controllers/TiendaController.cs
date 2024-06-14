@@ -87,7 +87,7 @@ namespace CapaTienda.Controllers
 
         public ActionResult Cesta()
         {
-            int IdUsuario = (int)Session["UserId"];
+            var IdUsuario = (int)Session["UserId"];
             CN_Tienda cn_tienda = new CN_Tienda();
             ListaDeseos resultado = cn_tienda.ListaDeseos(IdUsuario);
             return View(resultado);

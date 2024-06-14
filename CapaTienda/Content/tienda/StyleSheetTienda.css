@@ -1,0 +1,425 @@
+﻿@font-face {
+    font-family: 'fuente'; /* Nombre que quieres darle a tu fuente */
+    src: url('../Astonpoliz.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: fuente;
+}
+
+body {
+    background-color: #9393DB;
+    width: 100%;
+    font-family: fuente;
+}
+
+header {
+    background-color: #F5F5FD;
+    height: 85px;
+    width: 100%;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.opciones {
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+    color: #6464AB;
+    border: none;
+    background-color: #F5F5FD;
+}
+
+.categoria {
+    width: 140px;
+}
+
+.marca {
+    width: 100px;
+}
+
+nav {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+}
+
+    nav > div {
+        display: flex;
+        align-items: center;
+    }
+
+#nav11 {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.icono img {
+    height: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    width: auto; /* Mantén la proporción de la imagen */
+    margin-left: 8px;
+}
+
+a {
+    text-decoration: none;
+    color: #6464AB;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.titulo {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    margin-top: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 30px 30px 20px 30px;
+    color: #6464AB;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid #e5e5e5;
+}
+
+    .footer > * {
+        flex: 1 100%;
+    }
+
+.footer__addr {
+    margin-right: 1.25em;
+    margin-bottom: 2em;
+}
+
+.footer__logo {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 1.5rem;
+}
+
+.footer__addr h2 {
+    margin-top: 1.3em;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.nav__title {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.footer address {
+    font-style: normal;
+    color: #999;
+}
+
+.footer__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    max-width: max-content;
+    background-color: rgb(33, 33, 33, 0.07);
+    border-radius: 100px;
+    color: #2f2f2f;
+    line-height: 0;
+    margin: 0.6em 0;
+    font-size: 1rem;
+    padding: 0 1.3em;
+}
+
+.footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer li {
+    line-height: 2em;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer__nav {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+    .footer__nav > * {
+        flex: 1 50%;
+        margin-right: 1.25em;
+    }
+
+.nav__ul a {
+    color: #999;
+}
+
+.nav__ul--extra {
+    column-count: 2;
+    column-gap: 1.25em;
+}
+
+.legal {
+    display: flex;
+    flex-wrap: wrap;
+    color: #999;
+}
+
+.legal__links {
+    display: flex;
+    align-items: center;
+}
+
+.heart {
+    color: #2f2f2f;
+}
+
+@media screen and (min-width: 24.375em) {
+    .legal .legal__links {
+        margin-left: auto;
+    }
+}
+
+@media screen and (min-width: 40.375em) {
+    .footer__nav > * {
+        flex: 1;
+    }
+
+    .nav__item--extra {
+        flex-grow: 2;
+    }
+
+    .footer__addr {
+        flex: 1 0px;
+    }
+
+    .footer__nav {
+        flex: 2 0px;
+    }
+}
+
+
+.formulario {
+    margin: auto;
+    display: none; /* Ocultar el formulario por defecto */
+    position: fixed; /* Posicionarlo fijo */
+    top: 60%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste para centrar */
+    padding: 3rem; /* Relleno del formulario */
+    background: white; /* Fondo blanco */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra */
+    border-radius: 8px; /* Bordes redondeados */
+    width: 500px;
+}
+
+#loginForm {
+    background-color: #9393DB;
+}
+
+.sesion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .sesion h2 {
+        font-size: 35px;
+        color: #6464AB;
+    }
+
+    .sesion label {
+        margin: 20px;
+        font-size: 30px;
+        color: #6464AB;
+    }
+
+    .sesion input {
+        border: solid 3px #6464AB;
+        height: 50px;
+        font-size: 22px;
+    }
+
+.cuadro {
+    background-color: #F5F5FD;
+    padding: 80px;
+    border-radius: 8px;
+}
+
+.mt-3 {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 80px;
+    height: 35px;
+}
+
+.enlace {
+    text-decoration: underline;
+    margin-top: 30px;
+    color: #6464AB;
+}
+
+.gg {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .gg img {
+        margin-top: -40px;
+        margin-bottom: 30px;
+        height: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+        width: auto; /* Mantén la proporción de la imagen */
+        margin-left: 8px;
+        transform: rotate(270deg); /* Rotar la imagen 180 grados */
+    }
+
+#fr {
+    padding: 25px;
+    margin: auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 480px;
+    font-size: 25px;
+}
+
+.in {
+    margin-right: 10px;
+    height: 30px;
+}
+
+.frr {
+    background-color: #F5F5FD;
+}
+
+    .frr p {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+.loodo {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrar verticalmente */
+}
+
+    .loodo h1 {
+        margin: 0 20px; /* Añadir un margen horizontal para separar las imágenes y el texto */
+        font-size: 40px; /* Ajustar el tamaño de la fuente si es necesario */
+    }
+
+#bu {
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.box {
+    padding-top: 10px;
+    display: flex;
+    align-items: center; /* Alinea verticalmente el checkbox y el label */
+    margin-bottom: 10px; /* Espacio entre cada checkbox */
+}
+
+    .box label {
+        margin-left: 15px; /* Espacio entre el checkbox y el label */
+        font-size: 16px; /* Ajusta el tamaño de la fuente del label si es necesario */
+    }
+
+.cositas {
+    width: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin: 40px 20px;
+    border: solid 3px black;
+    background-color: #F5F5FD;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease;
+}
+
+    .cositas:hover {
+        transform: scale(1.1); /* Agranda la imagen un 20% */
+        /*height:450px;*/
+    }
+
+    .cositas p {
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+
+.i1 {
+    width: 150px;
+    height: 200px;
+}
+/*    .completo {
+        display: flex;
+        align-content:center;
+        flex-wrap: wrap; 
+        margin: 0 15px;
+    }*/
+.contendor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegúrate de que el contenedor ocupe toda la altura de la pantalla */
+    width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho de la pantalla */
+}
+
+.bf {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cont1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 15px;
+    height: auto;
+}
+
+#buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#descripcion {
+    font-size: 10px;
+}
+
+.detalles {
+    margin: 10px 0;
+}
+
+.viv {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -200px;
+    margin-top: 30px;
+}

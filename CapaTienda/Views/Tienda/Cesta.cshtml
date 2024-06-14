@@ -1,0 +1,29 @@
+﻿
+@model CapaEntidad.ListaDeseos
+
+@{
+    ViewBag.Title = "Cesta";
+    Layout = "~/Views/Shared/_Layout_tienda.cshtml";
+}
+
+
+<div>
+    <h2>LISTA DE DESEOS</h2>
+    <div class="contendor">
+        <div class="cont1">
+            @foreach (CapaEntidad.Producto deseos in Model.Productos)
+            {
+                <div class="cositas">
+                    <p id="IdProducto" hidden>@deseos.IdProducto</p>
+                    <p>@deseos.Nombre</p>
+                    <img class="i1" src='@deseos.RutaImagen' />
+                    <p>@deseos.Precio€</p>
+                    <div class="bf">
+                        <button onclick="Eliminar(@Model.usuarioId, @deseos.IdProducto)">Eliminar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

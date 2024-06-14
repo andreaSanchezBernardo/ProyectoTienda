@@ -1,0 +1,45 @@
+﻿@model List<CapaEntidad.Producto>
+
+@{
+    ViewBag.Title = "Inicio";
+
+    Layout = "~/Views/Shared/_Layout_tienda.cshtml";
+}
+<a style="color:black; font-size:30px" href="@Url.Action("Index","Home")">###</a>
+<div class="titulo">
+    <img />
+    <h1>LET'S PLAY</h1>
+    <img />
+</div>
+<div class="contendor">
+
+    <div class="cont1">
+
+
+        @foreach (var producto in Model)
+        {
+            <div class="cositas">
+                <p id="IdProducto" hidden>@producto.IdProducto</p>
+                <p>@producto.Nombre</p>
+                <img class="i1" src='@producto.RutaImagen' />
+                <p>@producto.Precio€</p>
+                <div class="bf">
+                    <button><img src="" />cesta</button>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        function AñadirListaDeseos() {
+
+
+        }
+    </script>
+
+} 

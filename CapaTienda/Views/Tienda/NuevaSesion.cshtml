@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "IniciarSesion";
+    Layout = "~/Views/Shared/_LayoutRegistro.cshtml";
+}
+
+<div class="loodo">
+    <img src="~/iconos/juegos.png" />
+    <h1>LET'S PLAY'</h1>
+    <img src="~/iconos/juegos.png" />
+</div>
+<div class="frr">
+    <p>Introduce tus datos para crear una cuenta</p>
+    <form id="fr">
+        <input type="hidden" id="usuarioId" />
+        <input type="hidden" id="cbActivo" value="1" />
+        <input type="hidden" id="reestablecer" value="1" />
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="in" required />
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apelllido" id="apellido" class="in" required />
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" class="in" required />
+        <label for="clave">Contraseña</label>
+        <input type="password" name="clave" id="clave" class="in" required />
+        <label for="confirmar">Repetir Contraseña</label>
+        <input type="password" name="confirmar" id="confirmar" class="in" required />
+        <div class="box">
+            <label>Acepto los terminos y condiciones.</label>
+            <input type="checkbox" value="" required />
+        </div>
+        <div class="box">
+            <label>Quiero recibir ofertas.</label>
+            <input type="checkbox" value="" />
+        </div>
+        <input id="bu" type="submit" value="Confirmar" />
+    </form>
+</div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('#fr').on('submit', function (event) {
+                event.preventDefault();// Evita el comportamiento por defecto del formulario
+
+                const idUsuario = $('#idUsuario').val(); // Si tienes un campo de IdUsuario
+                const nombre = $('#nombre').val();
+                const apellido = $('#apellido').val();
+                const email = $('#email').val();
+                const clave = $('#clave').val();
+                const confirmar = $('#confirmar').val();
+                const activo = 1;
+                const reestablecer = 1;
+
+
+                // Verifica si las contraseñas coinciden
+                if (clave !== confirmar) {
+                    alert('Las contraseñas no coinciden');
+                    return; // Sale de la función si las contraseñas no coinciden
+                }
+
+                // Construye el objeto formData
+                const formData = {
+                    IdUsuario: idUsuario, // Asegúrate de que este campo exista y tenga sentido en tu contexto
+                    Nombres: nombre,
+                    Apellidos: apellido,
+                    Correo: email,
+                    Clave: clave,
+                    Activo: activo,
+                    Reestablecer: reestablecer,
+
+                };
+
+                // Realiza la solicitud AJAX
+
+                var url = '@Url.Action("AgregarUsuario", "Tienda")';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        // Maneja la respuesta del servidor
+                        alert(response.mensaje);
+                        window.location.href = '@Url.Action("Index", "Tienda")';
+                    },
+                    error: function (error) {
+                        // Maneja los errores
+                        alert(response.mensaje);
+                    }
+                });
+            });
+        })
+    </script>
+
+}

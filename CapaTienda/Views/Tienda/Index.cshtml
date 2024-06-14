@@ -1,0 +1,66 @@
+﻿
+
+@model List<CapaEntidad.Producto>
+@{
+    ViewBag.Title = "Acceso";
+    Layout = "~/Views/Shared/_Layout_acceso.cshtml";
+}
+
+<div class="titulo">
+    <img />
+    <h1>LET'S PLAY</h1>
+    <img />
+</div>
+<div id="buscador">
+    <label for="buscar">Buscar</label>
+    <input type="text" name="buscar" id="buscar" />
+    <input type="submit" value="Aceptar" />
+</div>
+<div class="contendor">
+    <div class="cont1">
+        @foreach (var producto in Model)
+        {
+            <div class="cositas">
+                <p id="IdProducto" hidden>@producto.IdProducto</p>
+                <p>@producto.Nombre</p>
+                <img class="i1" src='@producto.RutaImagen' />
+                <p>@producto.Precio€</p>
+                <div class="bf">
+                    <button onclick="AñadirListaDeseos(@producto.IdProducto)">deseos</button>
+                    <button><img src="" />cesta</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+    {
+    <script>
+
+        function AñadirListaDeseos(IdProducto) {
+            fetch('@Url.Action("ListaDeseos", "Tienda")', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProducto: IdProducto })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();// Recargar la página para actualizar la lista de deseos
+                        alert("Añadido a la lista de deseos correctamente");
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
+
+
+
+
+    </script>
+}
