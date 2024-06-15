@@ -1,5 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,9 +88,10 @@ namespace CapaTienda.Controllers
 
         public ActionResult Cesta()
         {
-            var IdUsuario = (int)Session["UserId"];
+            //int IdUsuario = (int)Session["UserId"];
             CN_Tienda cn_tienda = new CN_Tienda();
-            ListaDeseos resultado = cn_tienda.ListaDeseos(IdUsuario);
+            ListaDeseos resultado = cn_tienda.ListaDeseos((int)Session["UserId"]);
+            
             return View(resultado);
 
         }

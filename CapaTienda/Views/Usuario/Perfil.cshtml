@@ -1,0 +1,44 @@
+﻿@model List<CapaEntidad.Usuario>
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_Layout_acceso.cshtml";
+    var uNombre = Model.First();
+}
+<div class="per">
+    <h2>¡HOLA,@uNombre.Nombres!</h2>
+    <div>
+        <div>
+            <img id="img_producto" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
+        </div>
+        <div>
+            <input class="form-control" type="file" id="fileProducto" accept="image/jpg, image/png, image/jpeg" onchange="mostrarImagen(this)" />
+        </div>
+    </div>
+</div>
+<hr />
+<div class="contendor3">
+
+    <div class="cont3">
+
+        @foreach (var usuario in Model)
+        {
+            <div class="cositas3">
+                <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
+                <img />
+                <p>Nombre:@usuario.Nombres</p>
+                <p>Apellido:@usuario.Apellidos</p>
+                <p>Email:@usuario.Correo</p>
+                <p>Contraseña en clave:@usuario.Clave</p>
+                <div class="bf">
+                    <button><img src="" />Editar</button>
+                </div>
+            </div>
+
+        }
+
+
+    </div>
+    <div class="cont3">
+        <p>jsdkajndkj</p>
+    </div>
+</div>

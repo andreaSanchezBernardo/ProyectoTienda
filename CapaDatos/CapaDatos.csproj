@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="CD_Categorias.cs" />
     <Compile Include="CD_Marcas.cs" />
+    <Compile Include="CD_Perfil.cs" />
     <Compile Include="CD_Productos.cs" />
     <Compile Include="CD_Tienda.cs" />
     <Compile Include="CD_Usuarios.cs" />

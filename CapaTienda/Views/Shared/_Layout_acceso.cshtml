@@ -16,28 +16,28 @@
         <nav>
             <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
             <div class="icono">
-                <a href="@Url.Action("Inicio","Tienda")">Home</a>
-                <img src="~/iconos/pikachu.png" />
+                <a href="@Url.Action("Index","Tienda")">Inicio</a>
+                <img src="~/iconos/hogar.png" />
             </div>
             <div class="icono">
                 <a href="">Marcas</a>
-                <img src="~/iconos/rattata.png" />
+                <img src="~/iconos/marcos.png" />
             </div>
             <div class="icono">
-                <a href="">Categorias</a>
-                <img src="~/iconos/eevee.png" />
+                <a href="">Productos</a>
+                <img src="~/iconos/estrellao.png" />
             </div>
             <div class="icono">
                 <a href="@Url.Action("Cesta","Tienda")">Cesta</a>
-                <img src="~/iconos/meowth.png" />
+                <img src="~/iconos/carro-de-la-compra.png" />
             </div>
             <div class="icono">
-                <select class="opciones" id="userActions">
+                <select class="opciones" id="userActions" onchange="handleSesion()">
                     <option value="">Sesion Iniciada</option>
-                    <option value="1">Pelfil</option>
-                    <option value="0">Cerrar Sesion</option>
+                    <option value="perfil">Pelfil</option>
+                    <option value="cerrarSesion">Cerrar Sesion</option>
                 </select>
-                <img src="~/iconos/entrenador-pokemon.png" />
+                <img src="~/iconos/usuario.png" />
             </div>
         </nav>
     </header>
@@ -137,6 +137,19 @@
         </div>
     </footer>
 
+    <script>
+    function handleSesion() {
+            var select = document.getElementById('userActions');
+            var value = select.value;
+            var userId = document.getElementById('usuarioId').value;
+
+            if (value === "perfil") {
+                window.location.href = '@Url.Action("Perfil", "Usuario")' + '?IdUsuario=' + userId;
+            } else if (value === "cerrarSesion") {
+                window.location.href = '@Url.Action("CerrarSesion", "NombreDelControlador")';
+            }
+        }
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/complementos")

@@ -130,6 +130,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -332,6 +333,12 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\Astonpoliz.ttf" />
+    <Content Include="iconos\bolsa-de-la-compra.png" />
+    <Content Include="iconos\carro-de-la-compra.png" />
+    <Content Include="iconos\estrellao.png" />
+    <Content Include="iconos\hogar.png" />
+    <Content Include="iconos\marcos.png" />
+    <Content Include="iconos\usuario.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -503,10 +510,10 @@
     <Content Include="Views\Tienda\PaginaCategoria.cshtml" />
     <Content Include="Views\Tienda\PaginaMarca.cshtml" />
     <Content Include="Views\Tienda\Cesta.cshtml" />
+    <Content Include="Views\Usuario\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="iconos\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\imagenes\" />
   </ItemGroup>
