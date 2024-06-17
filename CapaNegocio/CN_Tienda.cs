@@ -78,5 +78,14 @@ namespace CapaNegocio
             CD_Tienda cd_tienda = new CD_Tienda();
             return cd_tienda.ListadeDeseos(IdUsuario);
         }
+        public List<Marca> MarcasPagina()
+        { 
+            return CD_Tienda.PaginaMarca();
+        }
+        public CategoriasYproductos CategoriaAcceso()
+        {
+            CD_Tienda cd_tienda = new CD_Tienda();
+            return cd_tienda.CategoriasAcceso();
+        }
     }
 }

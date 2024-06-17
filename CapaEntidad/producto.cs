@@ -39,4 +39,17 @@ namespace CapaEntidad
         public string NombreMarca { get; set; }
         public List<Producto> Productos { get; set; }
     }
+
+    public class MarcasYproductos
+    {
+        public List<Marca> ListaMarcas { get; set; }
+        public List<Producto> Productos { get; set; }
+    }
+
+    public class CategoriasYproductos
+    {
+
+        public List<Categoria> ListaCategorias { get; set; }
+        public List<Producto> Productos { get; set; }
+    }
 }

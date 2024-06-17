@@ -237,5 +237,86 @@ namespace CapaDatos
             }
             return resultado;
         }
+
+        public List<Marca> PaginaMarca()
+        {
+            List <MARCA> resultado = null;
+            List<Marca> list= new List<Marca>(); 
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                    resultado = db.MARCA.Where(p => (bool)p.Activo).ToList();
+
+                    if (resultado != null)
+                    {
+                        resultado.ForEach(marca => list.Add(new Marca()
+                        {
+                            IdMarca = marca.IdMarca,                         
+                            Descripcion = marca.Descripcion,                           
+                            RutaImagen = marca.RutaImagen,
+                            Activo = (bool)marca.Activo,
+                        }));
+
+                    }
+                }
+
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return list;
+        }
+
+        public CategoriasYproductos CategoriasAcceso()
+        {
+            CategoriasYproductos resultado = new CategoriasYproductos();
+            List<PRODUCTO> listProducto = null;
+            List<Producto> producto= new List<Producto>();
+            List<CATEGORIA> listCategorias = null;
+            List<Categoria> categorias = new List<Categoria>();
+
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+
+                    listProducto = db.PRODUCTO.Where(p => (bool)p.Activo == true).OrderBy(n => n.Nombre).ToList();
+                    listCategorias = db.CATEGORIA.Where(p => (bool)p.Activo == true).ToList();
+
+                    producto = listProducto.Select(p => new Producto
+                    {
+                        IdProducto = p.IdProducto,
+                        Nombre = p.Nombre,
+                        Descripcion = p.Descripcion,
+                        IdMarca = p.IdMarca.Value,
+                        IdCategoria = (int)p.IdCategoria,
+                        Precio = (decimal)p.Precio,
+                        PrecioString = p.Precio.ToString(),
+                        Stock = (int)p.Stock,
+                        RutaImagen = p.RutaImagen,
+                        NombreImagen = p.NombreImagen,
+                        Activo = (bool)p.Activo,
+                        FechaRegistro = (DateTime)p.FechaRegistro
+                    }).ToList();
+
+                    categorias = listCategorias.Select(c => new Categoria
+                    {
+                        IdCategoria = c.IdCategoria,
+                        Descripcion = c.Descripcion,
+                        Activo = (bool)c.Activo,
+                        FechaRegistro = (DateTime)c.FechaRegistro
+                    }).ToList();
+
+                    resultado.Productos = producto;
+                    resultado.ListaCategorias = categorias;
+
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return resultado;
+        }
     }
 }

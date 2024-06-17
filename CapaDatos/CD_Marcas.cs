@@ -27,6 +27,7 @@ namespace CapaDatos
                             IdMarca = marca.IdMarca,
                             Descripcion = marca.Descripcion,
                             FechaRegistro = (DateTime)marca.FechaRegistro,
+                            RutaImagen= marca.RutaImagen,
                             Activo = (bool)marca.Activo
 
                         }));
@@ -71,7 +72,8 @@ namespace CapaDatos
                         {
                             Descripcion = marca.Descripcion,
                             FechaRegistro = DateTime.Now,
-                            Activo = marca.Activo
+                            Activo = marca.Activo,
+                            RutaImagen = marca.RutaImagen
                         };
                         db.MARCA.Add(nuevaMarca);
                         db.SaveChanges(); // Guarda los cambios en la base de datos
@@ -104,7 +106,7 @@ namespace CapaDatos
 
                     if (marcaExistente != null)
                     {
-
+                        marcaExistente.RutaImagen= marca.RutaImagen;
                         marcaExistente.Descripcion = marca.Descripcion;
                         marcaExistente.Activo = marca.Activo;
 

@@ -24,6 +24,7 @@ header {
 }
 
 .opciones {
+    cursor:pointer;
     width: 94px;
     height: 50px;
     font-size: 20px;
@@ -64,6 +65,13 @@ nav {
     width: auto; /* Mantén la proporción de la imagen */
     margin-left: 8px;
 }
+.inicioSesion {
+    color: #6464AB;
+    border: none;
+    background-color: #F5F5FD;
+    font-size:20px;
+    cursor:pointer;
+}
 
 a {
     text-decoration: none;
@@ -72,7 +80,7 @@ a {
 
 h1 {
     text-align: center;
-    font-size: 40px;
+    font-size: 60px;
 }
 
 .titulo {
@@ -359,6 +367,21 @@ h1 {
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
     font-size:25px;
 }
+.cositas6 {
+    width: 350px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin: 40px 20px;
+    border: solid 3px black;
+    background-color: #F5F5FD;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    font-size: 25px;
+}
  
 .cositas4 {
     width: 100px;
@@ -383,11 +406,17 @@ h1 {
     width: 50px;
     height: 100px;
 }
-.deseop{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-start;
-    align-items:center;
+.i5 {
+    width: 250px;
+    height: 350px;
+    border:solid 3px black;
+    border-radius:5px;
+}
+.deseop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 .cositas {
     width: 300px;

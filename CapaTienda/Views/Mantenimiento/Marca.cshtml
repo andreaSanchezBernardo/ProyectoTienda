@@ -28,6 +28,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Descripcion</th>
+                    <th>Imagen</th>
                     <th>Fecha Registro</th>
                     <th>Activo</th>
                     <th></th>
@@ -49,34 +50,41 @@
             <div class="modal-body">
                 <input type="hidden" id="IdMarca" />
                 <div class="row g-2">
-
                     <div class="col-sm-6">
-                        <label for="txtdescripcion" class="form-label">Descripcion</label>
-                        <input type="text" class="form-control" id="txtdescripcion">
+                        <div class="mb-2">
+                            <img id="img_producto" height="197" width="200" class="border rounded mx-auto d-block img-fluid" />
+                        </div>
+                        <div class="mb-2">
+                            <input class="form-control" type="file" id="fileProducto" accept="image/jpg, image/png, image/jpeg" onchange="mostrarImagen(this)" />
+                        </div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="cbActivo" class="form-label">Activo</label>
-                        <select class="form-select" id="cbActivo">
-                            <option value="1">Si</option>
-                            <option value="0">No</option>
-
-                        </select>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <div id="modalAlert" class="alert alert-danger" role="alert">
-                                A simple danger alert—check it out!
+                        <div class="mb-2">
+                            <label for="txtdescripcion" class="form-label">Descripcion</label>
+                            <input type="text" class="form-control" id="txtdescripcion">
+                        </div>
+                        <div class="mb-2">
+                            <label for="cbActivo" class="form-label">Activo</label>
+                            <select class="form-select" id="cbActivo">
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div id="modalAlert" class="alert alert-danger" role="alert">
+                                    A simple danger alert—check it out!
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="modal-footer mt-2">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardarMarca()">Guardar Cambios</button>
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarMarca()">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 @section scripts
@@ -99,6 +107,15 @@
               "columns": [
                   { "data": "IdMarca" },
                   { "data": "Descripcion" },
+                  {
+                      "data": "RutaImagen",
+                      "render": function (data, type, row) {
+                          // Asegúrate de que la URL de la imagen está construida correctamente
+                          var imageUrl = data ? data : '/path/to/default/image.jpg'; // Asegúrate de que esta ruta sea correcta
+                          return '<img src="' + imageUrl + '" alt="Imagen del producto" style="width: 50px; height: 50px; object-fit: cover;" />';
+                      
+                      }
+                  },            
                   {
                       "data": "FechaRegistro",
                       "render": function (data, type, row) {
@@ -132,12 +149,14 @@
 
             function abrirModal(data) {
                 if (data != null) {
-
+                    $('#img_producto').attr('src', data.RutaImagen);
                     $('#IdMarca').val(data.IdMarca);
                     $('#txtdescripcion').val(data.Descripcion);
                     $('#txtFecha').val(data.FechaRegistro);
                     $('#cbActivo').val(data.Activo ? '1' : '0');
                 } else {
+                    $('#img_producto').removeAttr('src');
+                    $('#fileProducto').val('');
                     $('#IdMarca').val('');
                     $('#txtdescripcion').val('');
                     $('#txtFecha').val('');
@@ -148,40 +167,57 @@
                 $('#modalAgregar').modal("show");
         }
 
+        function mostrarImagen(input) {
+            if (input.files) {
 
-                function guardarMarca() {
+                var reader = new FileReader();
 
-            var IdMarca = $('#IdMarca').val();
+                reader.onload = function (e) {
 
-            var marca = {
-
-                IdMarca: IdMarca,
-                Descripcion: $('#txtdescripcion').val(),
-                Activo: $('#cbActivo').val() === '1'
-            }
-            var url = IdMarca ? '@Url.Action("EditarMarca", "Mantenimiento")' : '@Url.Action("AgregarMarca", "Mantenimiento")';
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(marca),
-                success: function (response) {
-                    if (response.success) {
-                        $('#modalAgregar').modal('hide');// Cierra el modal
-                        alert(response.mensaje)
-                        tabladata.ajax.reload();// Recarga la tabla
-                    } else {
-                        $('#modalAlert').text(response.mensaje);
-                        $('#modalAlert').show();
-
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert('Error en la solicitud');
-                    console.log("Error en la solicitud: ", status, error);
-                    console.log("Detalles del error: ", xhr.responseText);
+                    $("#img_producto").attr("src", e.target.result).width(200).height(197)
                 }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        function guardarMarca() {
+
+        var IdMarca = $('#IdMarca').val();
+        var insertarImagen = $('#fileProducto')[0].files[0];
+
+        var formData = new FormData();
+        formData.append("IdMarca", IdMarca);
+        formData.append("Descripcion", $('#txtdescripcion').val());
+        formData.append("Activo", $('#cbActivo').val() === '1');
+
+        if (insertarImagen) {
+             formData.append("Imagen", insertarImagen);
+        }
+
+        var url = IdMarca ? '@Url.Action("EditarMarca", "Mantenimiento")' : '@Url.Action("AgregarMarca", "Mantenimiento")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#modalAgregar').modal('hide'); 
+                    alert(response.mensaje);
+                    tabladata.ajax.reload(); 
+                } else {
+                    $('#modalAlert').text(response.mensaje);
+                    $('#modalAlert').show();
+                }
+        },
+        error: function (xhr, status, error) {
+            alert('Error en la solicitud');
+            console.log("Error en la solicitud: ", status, error);
+            console.log("Detalles del error: ", xhr.responseText);
+        }
             });
         }
 

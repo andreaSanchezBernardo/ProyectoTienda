@@ -75,8 +75,26 @@ namespace CapaTienda.Controllers
         }
 
         [HttpPost]
-        public JsonResult AgregarMarca(Marca marca)
+        public JsonResult AgregarMarca(Marca marca, HttpPostedFileBase Imagen)
         {
+            if (Imagen != null && Imagen.ContentLength > 0)
+            {  // Ruta de la carpeta de destino
+                string carpeta = Server.MapPath("~/wwwroot/imagenesMarcas");
+                if (!Directory.Exists(carpeta))
+                {
+                    Directory.CreateDirectory(carpeta);
+                }
+
+                // Obtener el nombre del archivo de imagen
+                string archivo = Path.GetFileName(Imagen.FileName);
+
+                // Ruta completa del archivo de imagen
+                string rutaCompleta = Path.Combine(carpeta, archivo);
+                Imagen.SaveAs(rutaCompleta);
+
+                // Guardar la ruta relativa
+                marca.RutaImagen = "/wwwroot/imagenesMarcas/" + archivo;
+            }
 
             CN_Marcas oMarcas = new CN_Marcas();
             Response response = oMarcas.Agregar(marca);
@@ -86,8 +104,27 @@ namespace CapaTienda.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditarMarca(Marca marca)
+        public JsonResult EditarMarca(Marca marca, HttpPostedFileBase Imagen)
         {
+
+            if (Imagen != null && Imagen.ContentLength > 0)
+            {  // Ruta de la carpeta de destino
+                string carpeta = Server.MapPath("~/wwwroot/imagenesMarcas");
+                if (!Directory.Exists(carpeta))
+                {
+                    Directory.CreateDirectory(carpeta);
+                }
+
+                // Obtener el nombre del archivo de imagen
+                string archivo = Path.GetFileName(Imagen.FileName);
+
+                // Ruta completa del archivo de imagen
+                string rutaCompleta = Path.Combine(carpeta, archivo);
+                Imagen.SaveAs(rutaCompleta);
+
+                // Guardar la ruta relativa
+                marca.RutaImagen = "/wwwroot/imagenesMarcas/" + archivo;
+            }
             CN_Marcas oMarcas = new CN_Marcas();
             Response response = oMarcas.Editar(marca);
 

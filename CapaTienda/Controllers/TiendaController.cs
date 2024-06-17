@@ -114,5 +114,20 @@ namespace CapaTienda.Controllers
 
 
         }
+
+        public ActionResult MarcasAcceso()
+        {
+            List<Marca> oMarca = new List<Marca>();
+            oMarca = new CN_Tienda().MarcasPagina();
+            return View(oMarca);
+        }
+
+        public ActionResult CategoriasAcceso()
+        {
+            CN_Tienda cN_tienda= new CN_Tienda();
+            CategoriasYproductos resultado = cN_tienda.CategoriaAcceso();
+            return View(resultado);
+
+        }
     }
 }

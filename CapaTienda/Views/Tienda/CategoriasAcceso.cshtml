@@ -1,0 +1,73 @@
+﻿@model CapaEntidad.CategoriasYproductos
+@{
+    ViewBag.Title = "CategoriasAcceso";
+    Layout = "~/Views/Shared/_Layout_acceso.cshtml";
+}
+
+<style>
+    .navegador {
+        background-color: #8C8CB9;
+        height: 55px;
+    }
+
+    .btn5 {
+        font-size: 15px;
+        width: 100px;
+        height: 40px;
+        background-color: #F5F5FD;
+        border-radius: 5px;
+        transition: transform 0.1s ease;
+    }
+
+        .btn5:hover {
+            transform: scale(1.1);
+        }
+</style>
+
+<nav class="navegador">
+    @foreach (var categoria in Model.ListaCategorias)
+    {
+        <div>
+            <button class="btn5" onclick="filtrarProductosPorMarca(@categoria.IdCategoria)">@categoria.Descripcion</button>
+        </div>
+
+    }
+</nav>
+<nav class="navegador">
+</nav>
+
+    <div class="contendor">
+        <div class="cont1">
+            @foreach (var producto in Model.Productos)
+            {
+                <div class="cositas1 categoria-@producto.IdCategoria">
+                    <p id="IdProducto" hidden>@producto.IdProducto</p>
+                    <p>@producto.Nombre</p>
+                    <img class="i1" src='@producto.RutaImagen' />
+                    <details class="detalles">
+                        <summary>Descripción</summary>
+                        <p id="descripcion">@producto.Descripcion</p>
+                    </details>
+                    <p>@producto.Precio€</p>
+                    <div class="horizontal-line"></div>
+                    <div class="bf">
+                        <button class="btn4"><img src="~/iconos/estrellap.png" /></button>
+                        <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png" /></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @section scripts
+{
+        <script>
+
+            function filtrarProductosPorMarca(idCategoria) {
+                $('.cositas1').hide();
+
+                $('.categoria-' + idCategoria).show();
+            }
+
+        </script>
+    }

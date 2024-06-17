@@ -1,0 +1,26 @@
+﻿@model List<CapaEntidad.Marca>
+@{
+    ViewBag.Title = "PaginaMarcas";
+    Layout = "~/Views/Shared/_Layout_acceso.cshtml";
+}
+
+
+<div class="contendor">
+    <div class="cont1">
+        @foreach (var marca in Model)
+        {
+            <div class="cositas6 marca-@marca.IdMarca">
+                <p id="IdProducto" hidden>@marca.IdMarca</p>
+                <p>@marca.Descripcion</p>
+                <img class="i5" src='@marca.RutaImagen' />
+                <div class="horizontal-line"></div>
+                <div class="bf">
+                    <button class="btn4"><img src="~/iconos/estrellap.png" />Ver todos los productos</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

@@ -85,6 +85,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DISTRITO' no tiene definida ni
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="Activo" Type="bit" />
           <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="RutaImagen" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -400,6 +401,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__IdMarc__3E52440B" FromRole="MARCA" ToRole="PRODUCTO" />
+          <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -715,6 +717,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <EntitySetMapping Name="MARCA">
             <EntityTypeMapping TypeName="DBCARRITOModel.MARCA">
               <MappingFragment StoreEntitySet="MARCA">
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
                 <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />

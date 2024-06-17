@@ -34,11 +34,7 @@
                 <img src="~/iconos/carro-de-la-compra.png" />
             </div>
             <div class="icono">
-                <select class="opciones" id="userActions">
-                    <option value="" hidden>Usuario</option>
-                    <option value="1">Iniciar Sesión</option>
-                    <option value="0">Cerrar Sesión</option>
-                </select>
+                <button class="inicioSesion" id="userActions" onclick="AbrirModalSesion()">Iniciar Sesión</button>
                 <img src="~/iconos/usuario.png" />
             </div>
         </nav>
@@ -65,7 +61,7 @@
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary" id="loginForm">Continuar</button>
-                        <button type="button" class="btn btn-warning" id="closeForm">Cerrar</button>
+                        <button type="button" class="btn btn-warning" onclick="CerrarModalSesion()" id="closeForm">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -164,22 +160,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const userActions = document.getElementById('userActions');
+
+        function AbrirModalSesion() {
             const loginForm = document.getElementById('loginForm');
-            const closeFormButton = document.getElementById('closeForm');
+            /*const closeFormButton = document.getElementById('closeForm');*/
+            loginForm.style.display = 'block';    
+        }
 
-            userActions.addEventListener('change', function () {
-                if (this.value === '1') { // Iniciar Sesion
-                    loginForm.style.display = 'block';
-                }
-            });
-
-            closeFormButton.addEventListener('click', function () {
-                loginForm.style.display = 'none';
-                userActions.value = ''; // Resetear el select
-            });
-        });
+        function CerrarModalSesion() {
+            const closeForm = document.getElementById('loginForm');
+            closeForm.style.display = 'none';
+        }
+     
 
         $(document).ready(function () {
             $('#frr').on('submit', function (event) {

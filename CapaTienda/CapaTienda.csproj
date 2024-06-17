@@ -336,6 +336,7 @@
     <Content Include="iconos\bolsa-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-comprap.png" />
+    <Content Include="iconos\discos-compactos.png" />
     <Content Include="iconos\estrellao.png" />
     <Content Include="iconos\estrellap.png" />
     <Content Include="iconos\hogar.png" />
@@ -519,10 +520,13 @@
     <Content Include="Views\Tienda\PaginaMarca.cshtml" />
     <Content Include="Views\Tienda\Cesta.cshtml" />
     <Content Include="Views\Usuario\Perfil.cshtml" />
+    <Content Include="Views\Tienda\MarcasAcceso.cshtml" />
+    <Content Include="Views\Tienda\CategoriasAcceso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\ImagenesMarcas\" />
     <Folder Include="wwwroot\imagenes\" />
   </ItemGroup>
   <ItemGroup>
