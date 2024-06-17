@@ -37,5 +37,6 @@ namespace CapaDatos
         public virtual DbSet<DEPARTAMENTO> DEPARTAMENTO { get; set; }
         public virtual DbSet<DISTRITO> DISTRITO { get; set; }
         public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

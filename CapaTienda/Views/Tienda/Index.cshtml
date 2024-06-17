@@ -25,9 +25,10 @@
                 <p>@producto.Nombre</p>
                 <img class="i1" src='@producto.RutaImagen' />
                 <p>@producto.Precio€</p>
+                <div class="horizontal-line"></div>
                 <div class="bf">
-                    <button onclick="AñadirListaDeseos(@producto.IdProducto)">deseos</button>
-                    <button><img src="~/iconos/bolsa-de-la-compra.png" />cesta</button>
+                    <button class="btn4" onclick="AñadirListaDeseos(@producto.IdProducto)"><img src="~/iconos/estrellap.png"/></button>
+                    <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png"/></button>
                 </div>
             </div>
         }

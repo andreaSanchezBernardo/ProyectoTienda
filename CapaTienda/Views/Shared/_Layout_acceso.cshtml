@@ -33,7 +33,7 @@
             </div>
             <div class="icono">
                 <select class="opciones" id="userActions" onchange="handleSesion()">
-                    <option value="">Sesion Iniciada</option>
+                    <option value="">Usuario</option>
                     <option value="perfil">Pelfil</option>
                     <option value="cerrarSesion">Cerrar Sesion</option>
                 </select>
@@ -146,7 +146,7 @@
             if (value === "perfil") {
                 window.location.href = '@Url.Action("Perfil", "Usuario")' + '?IdUsuario=' + userId;
             } else if (value === "cerrarSesion") {
-                window.location.href = '@Url.Action("CerrarSesion", "NombreDelControlador")';
+                window.location.href = '@Url.Action("CerrarSesion", "Tienda")';
             }
         }
     </script>

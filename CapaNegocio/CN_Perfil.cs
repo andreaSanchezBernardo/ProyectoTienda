@@ -12,7 +12,7 @@ namespace CapaNegocio
     {
         private CD_Perfil CD_Perfil = new CD_Perfil();
 
-        public List<Usuario> MostrarUsuario(int IdUsuario)
+        public UsuarioConDeseos MostrarUsuario(int IdUsuario)
         {
             return CD_Perfil.MostrarUsuario(IdUsuario);
         }

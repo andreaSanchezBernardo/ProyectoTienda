@@ -335,7 +335,9 @@
     <Content Include="Content\Astonpoliz.ttf" />
     <Content Include="iconos\bolsa-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-compra.png" />
+    <Content Include="iconos\carro-de-la-comprap.png" />
     <Content Include="iconos\estrellao.png" />
+    <Content Include="iconos\estrellap.png" />
     <Content Include="iconos\hogar.png" />
     <Content Include="iconos\marcos.png" />
     <Content Include="iconos\usuario.png" />
@@ -367,6 +369,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="wwwroot\imagenesPerfil\asombrado.png" />
+    <Content Include="wwwroot\imagenesPerfil\asustado.png" />
+    <Content Include="wwwroot\imagenesPerfil\enojado.png" />
+    <Content Include="wwwroot\imagenesPerfil\muerte.png" />
+    <Content Include="wwwroot\imagenesPerfil\usuario.png" />
+    <Content Include="wwwroot\imagenesPerfil\zombi.png" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

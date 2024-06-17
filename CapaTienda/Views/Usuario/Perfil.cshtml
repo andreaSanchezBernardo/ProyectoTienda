@@ -1,18 +1,17 @@
-﻿@model List<CapaEntidad.Usuario>
+﻿@model CapaEntidad.UsuarioConDeseos
+
 @{
     ViewBag.Title = "Perfil";
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
-    var uNombre = Model.First();
+    
 }
 <div class="per">
-    <h2>¡HOLA,@uNombre.Nombres!</h2>
+    <h2>¡HOLA!</h2>
     <div>
         <div>
             <img id="img_producto" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
         </div>
-        <div>
-            <input class="form-control" type="file" id="fileProducto" accept="image/jpg, image/png, image/jpeg" onchange="mostrarImagen(this)" />
-        </div>
+
     </div>
 </div>
 <hr />
@@ -20,25 +19,43 @@
 
     <div class="cont3">
 
-        @foreach (var usuario in Model)
-        {
+ 
             <div class="cositas3">
                 <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
-                <img />
-                <p>Nombre:@usuario.Nombres</p>
-                <p>Apellido:@usuario.Apellidos</p>
-                <p>Email:@usuario.Correo</p>
-                <p>Contraseña en clave:@usuario.Clave</p>
-                <div class="bf">
-                    <button><img src="" />Editar</button>
+                <div>
+                    <div>
+                        <img id="img_producto" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
+                    </div>
+                    <div>
+                        <input class="form-control" type="file" id="fileProducto" accept="image/jpg, image/png, image/jpeg" onchange="mostrarImagen(this)" />
+                    </div>
+                </div>
+                <div>
+                    <p>Nombre:@Model.Usuario.Nombres</p>
+                    <p>Apellido:@Model.Usuario.Apellidos</p>
+                    <p>Email:@Model.Usuario.Correo</p>
+                    <div class="bf">
+                        <button><img src="" />Editar</button>
+                    </div>
                 </div>
             </div>
-
-        }
-
-
     </div>
-    <div class="cont3">
-        <p>jsdkajndkj</p>
+    <div class="cont3 w">
+        <h2>LISTA DE DESEOS</h2>
+        <div class="deseop">
+            @foreach (CapaEntidad.Producto deseos in Model.ListaDeseos.Productos)
+            {
+                <div class="cositas4">
+                    <p id="IdProducto" hidden>@deseos.IdProducto</p>
+                    @*<p>@deseos.Nombre</p>*@
+                    <img class="i2" src='@deseos.RutaImagen' />
+                    <p>@deseos.Precio€</p>
+                    <div class="bf">
+                        <button onclick="Eliminar(@Model.Usuario.IdUsuario, @deseos.IdProducto)">Eliminar</button>
+                    </div>
+                </div>
+            }
+
+        </div> 
     </div>
 </div>

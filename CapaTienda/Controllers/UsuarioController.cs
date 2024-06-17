@@ -13,10 +13,9 @@ namespace CapaTienda.Controllers
         // GET: Usuario
         public ActionResult Perfil(int IdUsuario)
         {
-            List<Usuario> oUsuario = new List<Usuario>();
-            oUsuario = new CN_Perfil().MostrarUsuario(IdUsuario);
-            
-            return View(oUsuario);
+            UsuarioConDeseos usuarioConDeseos = new CN_Perfil().MostrarUsuario(IdUsuario);
+
+            return View(usuarioConDeseos);
         }
 
    

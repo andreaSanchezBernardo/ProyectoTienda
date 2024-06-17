@@ -62,6 +62,13 @@ namespace CapaTienda.Controllers
             return Json(response);
         }
 
+        public ActionResult CerrarSesion()
+        {
+            Session["UserId"] = null;
+            Session.Clear();
+            return RedirectToAction("Inicio", "Tienda");
+        }
+
 
         public ActionResult Index()
         {

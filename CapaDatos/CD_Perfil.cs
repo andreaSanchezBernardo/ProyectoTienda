@@ -9,35 +9,122 @@ namespace CapaDatos
 {
     public class CD_Perfil
     {
-        public List<Usuario> MostrarUsuario(int IdUsuario)
+        public UsuarioConDeseos MostrarUsuario(int IdUsuario)
         {
-            List<USUARIO> listDatos = null;
-            List<Usuario> list = new List<Usuario>();
+            UsuarioConDeseos resultado = new UsuarioConDeseos();
 
             try
             {
-                using(DBCARRITOEntities db = new DBCARRITOEntities())
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
                 {
-                    listDatos = db.USUARIO.Where(u => u.IdUsuario == IdUsuario).ToList();
+                    // Obtener información del usuario
+                    var usuarioEntity = db.USUARIO.FirstOrDefault(u => u.IdUsuario == IdUsuario);
 
-                    if(listDatos != null)
+                    if (usuarioEntity != null)
                     {
-                        listDatos.ForEach(usuario => list.Add(new Usuario()
+                        resultado.Usuario = new Usuario
                         {
-                            IdUsuario = usuario.IdUsuario,
-                            Nombres = usuario.Nombres,
-                            Apellidos = usuario.Apellidos,
-                            Correo = usuario.Correo,
-                            Clave = usuario.Clave,
-
-                        }));
+                            IdUsuario = usuarioEntity.IdUsuario,
+                            Nombres = usuarioEntity.Nombres,
+                            Apellidos = usuarioEntity.Apellidos,
+                            Correo = usuarioEntity.Correo,
+                            RutaImagen = usuarioEntity.RutaImagen,
+                            Clave = usuarioEntity.Clave
+                        };
                     }
+
+                    // Obtener lista de deseos del usuario
+                    resultado.ListaDeseos = ListadeDeseos(IdUsuario);
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
-            return list;
+
+            return resultado;
+        }
+
+
+        public Response ListaDeseos(int IdProducto, int IdUsuario)
+        {
+            Response response = new Response();
+
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                    bool productoExiste = db.DESEOS.Any(d => d.productoID == IdProducto && d.usuarioID == IdUsuario);
+
+
+                    if (productoExiste)
+                    {
+                        Console.WriteLine("El producto ya está registrado.");
+                        response.success = false;
+                        response.mensaje = "El producto ya está registrado.";
+                    }
+                    else
+                    {
+                        DESEOS nuevoDeseo = new DESEOS
+                        {
+                            productoID = IdProducto,
+                            usuarioID = IdUsuario,
+                        };
+
+                        db.DESEOS.Add(nuevoDeseo);
+                        db.SaveChanges();
+
+                        response.success = true;
+                        response.mensaje = "Producto añadido a la lista de deseos correctamente";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return response;
+
+        }
+
+
+        public ListaDeseos ListadeDeseos(int IdUsuario)
+        {
+            ListaDeseos resultado = new ListaDeseos();
+            List<PRODUCTO> productos = null;
+
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                    var deseoUsuario = db.DESEOS.Where(d => d.usuarioID == IdUsuario).ToList();
+
+                    if (deseoUsuario != null && deseoUsuario.Count > 0)
+                    {
+                        var idsProductosDeseados = deseoUsuario.Select(d => d.productoID).ToList();
+                        productos = db.PRODUCTO.Where(p => (bool)p.Activo && idsProductosDeseados.Contains(p.IdProducto)).ToList();
+                        resultado.usuarioId = IdUsuario;
+
+                        if (productos != null && productos.Count > 0)
+                        {
+                            resultado.Productos = productos.Select(entity => new Producto
+                            {
+                                IdProducto = entity.IdProducto,
+                                Nombre = entity.Nombre,
+                                Precio = (decimal)entity.Precio,
+                                RutaImagen = entity.RutaImagen,
+                                Descripcion = entity.Descripcion
+                            }).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return resultado;
         }
 
     }

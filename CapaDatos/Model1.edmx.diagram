@@ -26,6 +26,7 @@
         <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdVen__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="DBCARRITOModel.FK__PRODUCTO__IdMarc__3E52440B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBCARRITOModel.sysdiagrams" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

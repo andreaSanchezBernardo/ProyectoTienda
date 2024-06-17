@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBCARRITOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBCARRITOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CARRITO">
           <Key>
             <PropertyRef Name="IdCarrito" />
@@ -114,6 +114,16 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="IdDepartamento" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="USUARIO">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -126,6 +136,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Reestablecer" Type="bit" />
           <Property Name="Activo" Type="bit" />
           <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="RutaImagen" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="VENTA">
           <Key>
@@ -258,6 +269,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" store:Type="Tables" store:Schema="dbo">
@@ -318,8 +330,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="DESEOS" EntitySet="DESEOS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBCARRITOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -424,6 +435,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DESEOS" Relationship="Self.FK_DESEOS_USUARIO" FromRole="USUARIO" ToRole="DESEOS" />
+          <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VENTA">
           <Key>
@@ -629,7 +641,18 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="MARCA" EntitySet="MARCA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="DBCARRITOModel.sysdiagrams" />
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -719,6 +742,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="DBCARRITOModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
@@ -770,6 +794,17 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBCARRITOModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

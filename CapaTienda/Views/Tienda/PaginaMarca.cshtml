@@ -1,5 +1,6 @@
 ﻿
 @model List<CapaEntidad.Producto>
+
 @{
     ViewBag.Title = "PaginaMarca";
     Layout = "~/Views/Shared/_Layout_tienda.cshtml";
@@ -11,7 +12,7 @@
     <div class="cont1">
         @foreach (var producto in Model)
         {
-            <div class="cositas">
+            <div class="cositas1">
                 <p id="IdProducto" hidden>@producto.IdProducto</p>
                 <p>@producto.Nombre</p>
                 <img class="i1" src='@producto.RutaImagen' />
@@ -20,9 +21,9 @@
                     <p id="descripcion">@producto.Descripcion</p>
                 </details>
                 <p>@producto.Precio€</p>
-                <div class="bf">
-                    <button onclick="">deseos</button>
-                    <button><img src="" />cesta</button>
+                <div class="horizontal-line"></div>
+                <div class="bf">                   
+                    <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png" /></button>
                 </div>
             </div>
         }

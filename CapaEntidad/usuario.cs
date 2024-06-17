@@ -17,6 +17,15 @@ namespace CapaEntidad
         public bool? Reestablecer { get; set; }
         public bool? Activo { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string RutaImagen { get; set; }  
 
+    }
+    public class UsuarioConDeseos
+    {
+       
+        public Usuario Usuario { get; set; }
+
+        public ListaDeseos ListaDeseos { get; set; }
+       
     }
 }
