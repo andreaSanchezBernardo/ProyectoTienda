@@ -18,6 +18,11 @@ namespace CapaTienda.Controllers
             return View(usuarioConDeseos);
         }
 
-   
+      public JsonResult AgregarImagenPerfil(int usuarioId, string rutaImagen)
+        {
+            CN_Perfil cd_perfil = new CN_Perfil();
+            Response response = cd_perfil.CambiarImagenPerfil(usuarioId, rutaImagen);
+            return Json(response);
+        }
     }
 }

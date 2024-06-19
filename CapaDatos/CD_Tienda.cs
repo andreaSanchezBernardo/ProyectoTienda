@@ -268,13 +268,15 @@ namespace CapaDatos
             return list;
         }
 
-        public CategoriasYproductos CategoriasAcceso()
+        public CategoriasYproductosYmarcas CategoriasAcceso()
         {
-            CategoriasYproductos resultado = new CategoriasYproductos();
+            CategoriasYproductosYmarcas resultado = new CategoriasYproductosYmarcas();
             List<PRODUCTO> listProducto = null;
             List<Producto> producto= new List<Producto>();
             List<CATEGORIA> listCategorias = null;
             List<Categoria> categorias = new List<Categoria>();
+            List<MARCA> listMarcas = null;
+            List<Marca> marcas = new List<Marca>();
 
             try
             {
@@ -283,6 +285,7 @@ namespace CapaDatos
 
                     listProducto = db.PRODUCTO.Where(p => (bool)p.Activo == true).OrderBy(n => n.Nombre).ToList();
                     listCategorias = db.CATEGORIA.Where(p => (bool)p.Activo == true).ToList();
+                    listMarcas = db.MARCA.Where(p => (bool)p.Activo == true).ToList();
 
                     producto = listProducto.Select(p => new Producto
                     {
@@ -308,8 +311,17 @@ namespace CapaDatos
                         FechaRegistro = (DateTime)c.FechaRegistro
                     }).ToList();
 
+                    marcas = listMarcas.Select(m => new Marca
+                    {
+                        IdMarca = m.IdMarca,
+                        Descripcion = m.Descripcion,
+                        Activo = (bool)m.Activo,
+                        FechaRegistro = (DateTime)m.FechaRegistro
+                    }).ToList();
+
                     resultado.Productos = producto;
                     resultado.ListaCategorias = categorias;
+                    resultado.ListaMarcas = marcas;
 
                 }
             }catch(Exception ex)

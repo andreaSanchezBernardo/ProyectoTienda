@@ -17,5 +17,13 @@ namespace CapaNegocio
             return CD_Perfil.MostrarUsuario(IdUsuario);
         }
 
+        public Response CambiarImagenPerfil(int usuarioId, string rutaImagen)
+        {
+            CD_Perfil cD_Perfil = new CD_Perfil();
+            Response response = cD_Perfil.CambiarImagenPerfil(usuarioId, rutaImagen);
+            return response;
+            
+        }
+
     }
 }

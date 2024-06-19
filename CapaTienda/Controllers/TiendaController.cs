@@ -125,7 +125,7 @@ namespace CapaTienda.Controllers
         public ActionResult CategoriasAcceso()
         {
             CN_Tienda cN_tienda= new CN_Tienda();
-            CategoriasYproductos resultado = cN_tienda.CategoriaAcceso();
+            CategoriasYproductosYmarcas resultado = cN_tienda.CategoriaAcceso();
             return View(resultado);
 
         }

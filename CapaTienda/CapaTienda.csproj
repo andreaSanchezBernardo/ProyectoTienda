@@ -334,6 +334,7 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\Astonpoliz.ttf" />
     <Content Include="iconos\bolsa-de-la-compra.png" />
+    <Content Include="iconos\borrar.png" />
     <Content Include="iconos\carro-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-comprap.png" />
     <Content Include="iconos\discos-compactos.png" />
@@ -372,8 +373,12 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="wwwroot\imagenesPerfil\asombrado.png" />
     <Content Include="wwwroot\imagenesPerfil\asustado.png" />
+    <Content Include="wwwroot\imagenesPerfil\dracula.png" />
     <Content Include="wwwroot\imagenesPerfil\enojado.png" />
+    <Content Include="wwwroot\imagenesPerfil\feliz.png" />
+    <Content Include="wwwroot\imagenesPerfil\irritado.png" />
     <Content Include="wwwroot\imagenesPerfil\muerte.png" />
+    <Content Include="wwwroot\imagenesPerfil\triste.png" />
     <Content Include="wwwroot\imagenesPerfil\usuario.png" />
     <Content Include="wwwroot\imagenesPerfil\zombi.png" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

@@ -82,7 +82,7 @@ namespace CapaNegocio
         { 
             return CD_Tienda.PaginaMarca();
         }
-        public CategoriasYproductos CategoriaAcceso()
+        public CategoriasYproductosYmarcas CategoriaAcceso()
         {
             CD_Tienda cd_tienda = new CD_Tienda();
             return cd_tienda.CategoriasAcceso();

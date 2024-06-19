@@ -127,5 +127,39 @@ namespace CapaDatos
             return resultado;
         }
 
+        public Response CambiarImagenPerfil(int usuarioId, string rutaImagen)
+        {
+            Response response = new Response();
+
+            try
+            {
+
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                   USUARIO usuario= db.USUARIO.Find(usuarioId);
+
+                    if (usuario != null)
+                    {
+                        usuario.RutaImagen = rutaImagen;
+                        db.SaveChanges();
+                        response.success = true;
+                        response.mensaje = "Imagen de perfil actualizada con éxito";
+                    }
+                    else
+                    {
+                        response.success = false;
+                        response.mensaje = "Usuario no encontrado";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.mensaje = $"Hubo un problema al actualizar la imagen de perfil: {ex.Message}";
+            }
+
+            return response;
+        }
+
     }
 }

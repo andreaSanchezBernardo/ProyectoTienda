@@ -21,7 +21,7 @@ namespace CapaDatos
         }
     
         public int IdVenta { get; set; }
-        public Nullable<int> IdCliente { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> TotalProducto { get; set; }
         public Nullable<decimal> SumaTotal { get; set; }
         public string Contacto { get; set; }
@@ -31,8 +31,8 @@ namespace CapaDatos
         public string IdTransaccion { get; set; }
         public Nullable<System.DateTime> FechaVenta { get; set; }
     
-        public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_VENTA> DETALLE_VENTA { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

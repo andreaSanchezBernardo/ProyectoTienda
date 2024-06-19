@@ -40,15 +40,9 @@ namespace CapaEntidad
         public List<Producto> Productos { get; set; }
     }
 
-    public class MarcasYproductos
+    public class CategoriasYproductosYmarcas
     {
         public List<Marca> ListaMarcas { get; set; }
-        public List<Producto> Productos { get; set; }
-    }
-
-    public class CategoriasYproductos
-    {
-
         public List<Categoria> ListaCategorias { get; set; }
         public List<Producto> Productos { get; set; }
     }

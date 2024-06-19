@@ -15,11 +15,11 @@ namespace CapaDatos
     public partial class CARRITO
     {
         public int IdCarrito { get; set; }
-        public Nullable<int> IdCliente { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> IdProducto { get; set; }
         public Nullable<int> Cantidad { get; set; }
     
-        public virtual CLIENTE CLIENTE { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

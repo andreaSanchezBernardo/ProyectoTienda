@@ -5,11 +5,63 @@
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
     
 }
+<style>
+    .imagenes-opcion{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 50%;
+    }
+    .btn7{
+        margin-top:15px;
+        height:45px;
+        width:120px;
+        font-size:30px;
+        border-radius:10px;
+    }
+    .datos {
+        margin-right: 40px;
+        padding: 40px;
+        font-size: 25px;
+        border-top: 2px solid black;
+        border-right: 2px solid black;
+        background-color: #9393DB;
+        border-radius: 10px;
+    }
+    .opciones-imagenes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 50%;
+        
+    }
+    .btn8 {
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: #F5F5FD;
+    }
+    .infor {
+        width: 50%;
+        height: 100%;
+        padding: 5px;
+        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        margin-right: 40px;
+        background-color: #8C8CB9;
+        border-radius: 10px;
+    }
+</style>
 <div class="per">
     <h2>¡HOLA!</h2>
     <div>
         <div>
-            <img id="img_producto" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
+            <img id="img_producto" src="@Model.Usuario.RutaImagen" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
         </div>
 
     </div>
@@ -18,25 +70,35 @@
 <div class="contendor3">
 
     <div class="cont3">
-
- 
             <div class="cositas3">
                 <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
-                <div>
-                    <div>
-                        <img id="img_producto" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
+                <div class="opciones-imagenes">
+                    <div class="imagenes-opcion">
+                        <img src="~/wwwroot/imagenesPerfil/asombrado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asombrado.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/asustado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asustado.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/enojado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/enojado.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/muerte.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/muerte.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/zombi.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/zombi.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/dracula.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/dracula.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/feliz.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/feliz.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/irritado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/irritado.png')" />
+                        <img src="~/wwwroot/imagenesPerfil/triste.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/triste.png')" />
                     </div>
                     <div>
-                        <input class="form-control" type="file" id="fileProducto" accept="image/jpg, image/png, image/jpeg" onchange="mostrarImagen(this)" />
+                        <button class="btn7" onclick="guardarImagenPerfil()">Guardar</button>
                     </div>
+                    
                 </div>
-                <div>
-                    <p>Nombre:@Model.Usuario.Nombres</p>
-                    <p>Apellido:@Model.Usuario.Apellidos</p>
-                    <p>Email:@Model.Usuario.Correo</p>
-                    <div class="bf">
-                        <button><img src="" />Editar</button>
-                    </div>
+                <div class="infor">                   
+                        <h3>Datos Personales:</h3>                  
+                    <div class="datos">
+                        <p>Nombre:@Model.Usuario.Nombres</p>
+                        <p>Apellido:@Model.Usuario.Apellidos</p>
+                        <p>Email:@Model.Usuario.Correo</p>
+                        <div class="bf">
+                            <button class="btn7" ><img src="" />Editar</button>
+                        </div>
+                    </div>                  
                 </div>
             </div>
     </div>
@@ -46,12 +108,13 @@
             @foreach (CapaEntidad.Producto deseos in Model.ListaDeseos.Productos)
             {
                 <div class="cositas4">
-                    <p id="IdProducto" hidden>@deseos.IdProducto</p>
-                    @*<p>@deseos.Nombre</p>*@
-                    <img class="i2" src='@deseos.RutaImagen' />
-                    <p>@deseos.Precio€</p>
+                    <div style="background-image:@deseos.RutaImagen" class="cosii">
+                        <p id="IdProducto" hidden>@deseos.IdProducto</p>
+                        <img class="i2" src='@deseos.RutaImagen' />
+                        
+                    </div>
                     <div class="bf">
-                        <button onclick="Eliminar(@Model.Usuario.IdUsuario, @deseos.IdProducto)">Eliminar</button>
+                        <button class="btn8" onclick="Eliminar(@Model.Usuario.IdUsuario, @deseos.IdProducto)"><img src="~/iconos/borrar.png" /></button>
                     </div>
                 </div>
             }
@@ -59,3 +122,42 @@
         </div> 
     </div>
 </div>
+@section scripts
+{
+    <script>
+        let imagenSeleccionada = null; 
+
+    function seleccionarImagen(rutaImagen) {
+        imagenSeleccionada = rutaImagen;
+        document.getElementById('img_producto').src = rutaImagen;
+    }
+
+    function guardarImagenPerfil() {
+        if (imagenSeleccionada !== null) {
+            const usuarioId = document.getElementById("usuarioId").value;
+
+            fetch('@Url.Action("AgregarImagenPerfil", "Usuario")', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ usuarioId: usuarioId, rutaImagen: imagenSeleccionada }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Imagen de perfil actualizada con éxito');
+                } else {
+                    alert('Hubo un problema al actualizar la imagen de perfil: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un problema al actualizar la imagen de perfil');
+            });
+        } else {
+            alert('Por favor, selecciona una imagen primero');
+        }
+    }
+    </script>
+}
