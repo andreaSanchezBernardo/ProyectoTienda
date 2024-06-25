@@ -95,12 +95,19 @@ namespace CapaTienda.Controllers
 
         public ActionResult Cesta()
         {
-            //int IdUsuario = (int)Session["UserId"];
-            CN_Tienda cn_tienda = new CN_Tienda();
-            ListaDeseos resultado = cn_tienda.ListaDeseos((int)Session["UserId"]);
-            
-            return View(resultado);
+            ListaCarrito carrito = new CN_Carrito().ListaCarrito((int)Session["UserId"]);
+            return View(carrito);
+        }
 
+        [HttpPost]
+        public JsonResult AnadirCarrito(int IdProducto)
+        {
+
+            int idUsuario = (int)Session["UserId"];
+
+            CN_Carrito cN_Carrito = new CN_Carrito();
+            cN_Carrito.AnadirCarrito(IdProducto, idUsuario);
+            return Json(cN_Carrito);
         }
         [HttpPost]
         public JsonResult ListaDeseos(int IdProducto)

@@ -14,6 +14,12 @@ namespace CapaDatos
     
     public partial class CARRITO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CARRITO()
+        {
+            this.DETALLE_VENTA = new HashSet<DETALLE_VENTA>();
+        }
+    
         public int IdCarrito { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> IdProducto { get; set; }
@@ -21,5 +27,7 @@ namespace CapaDatos
     
         public virtual USUARIO USUARIO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_VENTA> DETALLE_VENTA { get; set; }
     }
 }

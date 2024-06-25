@@ -59,12 +59,16 @@
     <Compile Include="CATEGORIA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="CD_Carrito.cs" />
     <Compile Include="CD_Categorias.cs" />
     <Compile Include="CD_Marcas.cs" />
     <Compile Include="CD_Perfil.cs" />
     <Compile Include="CD_Productos.cs" />
     <Compile Include="CD_Tienda.cs" />
     <Compile Include="CD_Usuarios.cs" />
+    <Compile Include="CLIENTE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DESEOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

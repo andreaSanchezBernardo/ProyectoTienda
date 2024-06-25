@@ -23,8 +23,18 @@
           <Property Name="Activo" Type="bit" />
           <Property Name="FechaRegistro" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DEPARTAMENTO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Clave" Type="varchar" MaxLength="150" />
+          <Property Name="Reestablecer" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
         <EntityType Name="DESEOS">
           <Key>
             <PropertyRef Name="id" />
@@ -42,9 +52,9 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DEPARTAMENTO' no tiene definid
           <Property Name="IdProducto" Type="int" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="Total" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdCarrito" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DISTRITO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MARCA">
           <Key>
             <PropertyRef Name="IdMarca" />
@@ -71,8 +81,6 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DISTRITO' no tiene definida ni
           <Property Name="Activo" Type="bit" />
           <Property Name="FechaRegistro" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="USUARIO">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -127,14 +135,14 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DETALLE_V__IdPro__5165187F">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="0..1" />
           <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="IdProducto" />
+            <Principal Role="CARRITO">
+              <PropertyRef Name="IdCarrito" />
             </Principal>
             <Dependent Role="DETALLE_VENTA">
-              <PropertyRef Name="IdProducto" />
+              <PropertyRef Name="IdCarrito" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,9 +218,22 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DETALLE_VENTA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBCARRITOModelStoreContainer">
           <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DESEOS" EntityType="Self.DESEOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
@@ -228,7 +249,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
           <AssociationSet Name="FK__DETALLE_V__IdPro__5165187F" Association="Self.FK__DETALLE_V__IdPro__5165187F">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
             <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
           </AssociationSet>
           <AssociationSet Name="FK__DETALLE_V__IdVen__5070F446" Association="Self.FK__DETALLE_V__IdVen__5070F446">
@@ -255,6 +276,10 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="DESEOS" EntitySet="DESEOS" />
           </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_VENTA_USUARIO" Association="Self.FK_DETALLE_VENTA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -263,6 +288,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
         <EntityContainer Name="DBCARRITOEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CARRITO" EntityType="DBCARRITOModel.CARRITO" />
           <EntitySet Name="CATEGORIA" EntityType="DBCARRITOModel.CATEGORIA" />
+          <EntitySet Name="CLIENTE" EntityType="DBCARRITOModel.CLIENTE" />
           <EntitySet Name="DESEOS" EntityType="DBCARRITOModel.DESEOS" />
           <EntitySet Name="DETALLE_VENTA" EntityType="DBCARRITOModel.DETALLE_VENTA" />
           <EntitySet Name="MARCA" EntityType="DBCARRITOModel.MARCA" />
@@ -277,6 +303,10 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_V__IdPro__5165187F" Association="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F">
+            <End Role="CARRITO" EntitySet="CARRITO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
           <AssociationSet Name="FK__PRODUCTO__IdCate__3F466844" Association="DBCARRITOModel.FK__PRODUCTO__IdCate__3F466844">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -289,12 +319,12 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="DESEOS" EntitySet="DESEOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_V__IdPro__5165187F" Association="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
-          </AssociationSet>
           <AssociationSet Name="FK__DETALLE_V__IdVen__5070F446" Association="DBCARRITOModel.FK__DETALLE_V__IdVen__5070F446">
             <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_VENTA_USUARIO" Association="DBCARRITOModel.FK_DETALLE_VENTA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
           </AssociationSet>
           <AssociationSet Name="FK__PRODUCTO__IdMarc__3E52440B" Association="DBCARRITOModel.FK__PRODUCTO__IdMarc__3E52440B">
@@ -316,6 +346,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Cantidad" Type="Int32" />
           <NavigationProperty Name="USUARIO" Relationship="DBCARRITOModel.FK__CARRITO__IdClien__48CFD27E" FromRole="CARRITO" ToRole="USUARIO" />
           <NavigationProperty Name="PRODUCTO" Relationship="DBCARRITOModel.FK__CARRITO__IdProdu__49C3F6B7" FromRole="CARRITO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" FromRole="CARRITO" ToRole="DETALLE_VENTA" />
         </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
@@ -326,6 +357,18 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PRODUCTO" Relationship="DBCARRITOModel.FK__PRODUCTO__IdCate__3F466844" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Reestablecer" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DESEOS">
           <Key>
@@ -346,8 +389,11 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="IdProducto" Type="Int32" />
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Total" Type="Decimal" Precision="4" Scale="2" />
-          <NavigationProperty Name="PRODUCTO" Relationship="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" FromRole="DETALLE_VENTA" ToRole="PRODUCTO" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdCarrito" Type="Int32" />
+          <NavigationProperty Name="CARRITO" Relationship="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" FromRole="DETALLE_VENTA" ToRole="CARRITO" />
           <NavigationProperty Name="VENTA" Relationship="DBCARRITOModel.FK__DETALLE_V__IdVen__5070F446" FromRole="DETALLE_VENTA" ToRole="VENTA" />
+          <NavigationProperty Name="USUARIO" Relationship="DBCARRITOModel.FK_DETALLE_VENTA_USUARIO" FromRole="DETALLE_VENTA" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="MARCA">
           <Key>
@@ -378,7 +424,6 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <NavigationProperty Name="CARRITO" Relationship="DBCARRITOModel.FK__CARRITO__IdProdu__49C3F6B7" FromRole="PRODUCTO" ToRole="CARRITO" />
           <NavigationProperty Name="CATEGORIA" Relationship="DBCARRITOModel.FK__PRODUCTO__IdCate__3F466844" FromRole="PRODUCTO" ToRole="CATEGORIA" />
           <NavigationProperty Name="DESEOS" Relationship="DBCARRITOModel.FK_DESEOS_PRODUCTO" FromRole="PRODUCTO" ToRole="DESEOS" />
-          <NavigationProperty Name="DETALLE_VENTA" Relationship="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" FromRole="PRODUCTO" ToRole="DETALLE_VENTA" />
           <NavigationProperty Name="MARCA" Relationship="DBCARRITOModel.FK__PRODUCTO__IdMarc__3E52440B" FromRole="PRODUCTO" ToRole="MARCA" />
         </EntityType>
         <EntityType Name="USUARIO">
@@ -396,6 +441,7 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CARRITO" Relationship="DBCARRITOModel.FK__CARRITO__IdClien__48CFD27E" FromRole="USUARIO" ToRole="CARRITO" />
           <NavigationProperty Name="DESEOS" Relationship="DBCARRITOModel.FK_DESEOS_USUARIO" FromRole="USUARIO" ToRole="DESEOS" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="DBCARRITOModel.FK_DETALLE_VENTA_USUARIO" FromRole="USUARIO" ToRole="DETALLE_VENTA" />
           <NavigationProperty Name="VENTA" Relationship="DBCARRITOModel.FK__VENTA__IdCliente__4CA06362" FromRole="USUARIO" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="VENTA">
@@ -439,6 +485,18 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DETALLE_V__IdPro__5165187F">
+          <End Type="DBCARRITOModel.CARRITO" Role="CARRITO" Multiplicity="0..1" />
+          <End Type="DBCARRITOModel.DETALLE_VENTA" Role="DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARRITO">
+              <PropertyRef Name="IdCarrito" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdCarrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PRODUCTO__IdCate__3F466844">
           <End Type="DBCARRITOModel.CATEGORIA" Role="CATEGORIA" Multiplicity="0..1" />
           <End Type="DBCARRITOModel.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
@@ -475,18 +533,6 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_V__IdPro__5165187F">
-          <End Type="DBCARRITOModel.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
-          <End Type="DBCARRITOModel.DETALLE_VENTA" Role="DETALLE_VENTA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="DETALLE_VENTA">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DETALLE_V__IdVen__5070F446">
           <End Type="DBCARRITOModel.VENTA" Role="VENTA" Multiplicity="0..1" />
           <End Type="DBCARRITOModel.DETALLE_VENTA" Role="DETALLE_VENTA" Multiplicity="*" />
@@ -496,6 +542,18 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
             </Principal>
             <Dependent Role="DETALLE_VENTA">
               <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_VENTA_USUARIO">
+          <End Type="DBCARRITOModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="DBCARRITOModel.DETALLE_VENTA" Role="DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,6 +607,19 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="DBCARRITOModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Reestablecer" ColumnName="Reestablecer" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DESEOS">
             <EntityTypeMapping TypeName="DBCARRITOModel.DESEOS">
               <MappingFragment StoreEntitySet="DESEOS">
@@ -561,6 +632,8 @@ advertencia 6002: La tabla o vista 'DBCARRITO.dbo.PROVINCIA' no tiene definida n
           <EntitySetMapping Name="DETALLE_VENTA">
             <EntityTypeMapping TypeName="DBCARRITOModel.DETALLE_VENTA">
               <MappingFragment StoreEntitySet="DETALLE_VENTA">
+                <ScalarProperty Name="IdCarrito" ColumnName="IdCarrito" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />

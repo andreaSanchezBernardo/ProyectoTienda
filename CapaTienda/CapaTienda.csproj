@@ -333,6 +333,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\Astonpoliz.ttf" />
+    <Content Include="iconos\agregar.png" />
     <Content Include="iconos\bolsa-de-la-compra.png" />
     <Content Include="iconos\borrar.png" />
     <Content Include="iconos\carro-de-la-compra.png" />

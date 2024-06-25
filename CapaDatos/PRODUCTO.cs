@@ -19,7 +19,6 @@ namespace CapaDatos
         {
             this.CARRITO = new HashSet<CARRITO>();
             this.DESEOS = new HashSet<DESEOS>();
-            this.DETALLE_VENTA = new HashSet<DETALLE_VENTA>();
         }
     
         public int IdProducto { get; set; }
@@ -39,8 +38,6 @@ namespace CapaDatos
         public virtual CATEGORIA CATEGORIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DESEOS> DESEOS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_VENTA> DETALLE_VENTA { get; set; }
         public virtual MARCA MARCA { get; set; }
     }
 }

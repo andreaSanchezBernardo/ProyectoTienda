@@ -5,21 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="adf4bfbcf8604ef9a9aacc4cd3285748" Name="Diagram1">
-        <EntityTypeShape EntityType="DBCARRITOModel.CARRITO" Width="1.5" PointX="5.625" PointY="3.875" />
-        <EntityTypeShape EntityType="DBCARRITOModel.CATEGORIA" Width="1.5" PointX="0.5" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCARRITOModel.DESEOS" Width="1.5" PointX="5.75" PointY="7.25" />
-        <EntityTypeShape EntityType="DBCARRITOModel.DETALLE_VENTA" Width="1.5" PointX="3.25" PointY="10.125" />
-        <EntityTypeShape EntityType="DBCARRITOModel.MARCA" Width="1.5" PointX="2.25" PointY="0.625" />
-        <EntityTypeShape EntityType="DBCARRITOModel.PRODUCTO" Width="1.5" PointX="3" PointY="3.125" />
-        <EntityTypeShape EntityType="DBCARRITOModel.USUARIO" Width="1.5" PointX="8.125" PointY="3.25" />
-        <EntityTypeShape EntityType="DBCARRITOModel.VENTA" Width="1.5" PointX="9.875" PointY="8.875" />
+        <EntityTypeShape EntityType="DBCARRITOModel.CARRITO" Width="1.5" PointX="7.375" PointY="1.75" />
+        <EntityTypeShape EntityType="DBCARRITOModel.CATEGORIA" Width="1.5" PointX="5.875" PointY="17.5" />
+        <EntityTypeShape EntityType="DBCARRITOModel.CLIENTE" Width="1.5" PointX="10.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DBCARRITOModel.DESEOS" Width="1.5" PointX="7.375" PointY="5" />
+        <EntityTypeShape EntityType="DBCARRITOModel.DETALLE_VENTA" Width="1.5" PointX="9.625" PointY="6.125" />
+        <EntityTypeShape EntityType="DBCARRITOModel.MARCA" Width="1.5" PointX="5.875" PointY="14.625" />
+        <EntityTypeShape EntityType="DBCARRITOModel.PRODUCTO" Width="1.5" PointX="5.125" PointY="9.125" />
+        <EntityTypeShape EntityType="DBCARRITOModel.USUARIO" Width="1.5" PointX="5.125" PointY="4.125" />
+        <EntityTypeShape EntityType="DBCARRITOModel.VENTA" Width="1.5" PointX="7.375" PointY="10.125" />
         <AssociationConnector Association="DBCARRITOModel.FK__CARRITO__IdClien__48CFD27E" />
         <AssociationConnector Association="DBCARRITOModel.FK__CARRITO__IdProdu__49C3F6B7" />
+        <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" />
         <AssociationConnector Association="DBCARRITOModel.FK__PRODUCTO__IdCate__3F466844" />
         <AssociationConnector Association="DBCARRITOModel.FK_DESEOS_PRODUCTO" />
         <AssociationConnector Association="DBCARRITOModel.FK_DESEOS_USUARIO" />
-        <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdPro__5165187F" />
         <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdVen__5070F446" />
+        <AssociationConnector Association="DBCARRITOModel.FK_DETALLE_VENTA_USUARIO" />
         <AssociationConnector Association="DBCARRITOModel.FK__PRODUCTO__IdMarc__3E52440B" />
         <AssociationConnector Association="DBCARRITOModel.FK__VENTA__IdCliente__4CA06362" />
       </Diagram>

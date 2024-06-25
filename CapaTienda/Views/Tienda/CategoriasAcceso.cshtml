@@ -110,7 +110,7 @@
                     <div class="horizontal-line"></div>
                     <div class="bf">
                         <button class="btn4" onclick="AñadirListaDeseos(@producto.IdProducto)"><img src="~/iconos/estrellap.png" /></button>
-                        <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png" /></button>
+                        <button class="btn4" onclick="AnadirCarrito(@producto.IdProducto)"><img src="~/iconos/carro-de-la-comprap.png" /></button>
                     </div>
                 </div>
             }
@@ -153,7 +153,28 @@
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
-}
+        }
 
+
+         function AnadirCarrito(IdProducto) {
+            fetch('@Url.Action("AnadirCarrito", "Tienda")', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProducto: IdProducto })
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();// Recargar la página para actualizar la lista de deseos
+                    alert("Añadido a la cesta correctamente");
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+}
         </script>
     }

@@ -1,29 +1,147 @@
 ﻿
-@model CapaEntidad.ListaDeseos
+@model CapaEntidad.ListaCarrito
 
 @{
     ViewBag.Title = "Cesta";
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
 }
 
-
 <div>
-    <h2>LISTA DE DESEOS</h2>
-    <div class="contendor">
-        <div class="cont1">
-            @foreach (CapaEntidad.Producto deseos in Model.Productos)
-            {
-                <div class="cositas">
-                    <p id="IdProducto" hidden>@deseos.IdProducto</p>
-                    <p>@deseos.Nombre</p>
-                    <img class="i1" src='@deseos.RutaImagen' />
-                    <p>@deseos.Precio€</p>
-                    <div class="bf">
-                        <button onclick="Eliminar(@Model.usuarioId, @deseos.IdProducto)">Eliminar</button>
-                    </div>
-                </div>
-            }
-        </div>
+    <h2>CESTA DE LA COMPRA</h2>
+    <div>
+        <table id="tabla" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Disponible</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model.Productos)
+                {
+                    <tr>
+                        <td>
+                            <img src="@producto.RutaImagen" alt="Imagen del producto" style="width: 50px; height: 50px; object-fit: cover;" />
+                        </td>
+                        <td>@producto.Nombre</td>
+                        <td>@producto.Precio</td>
+                        <td>
+                            @if (producto.Activo)
+                            {
+                                <span class="badge text-bg-success">STOCK</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-warning">NO STOCK</span>
+                            }
+                        </td>
+                        <td>
+                            <div>
+                                <input type="number" id="cantidad" />
+                                <div>
+                                    <button><img src="" /></button>
+                                    <button><img src="~/iconos/agregar.png" /></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+@*<div>
+        <h2>LISTA DE DESEOS</h2>
+        <div class="contendor">
+            <div class="cont1">
+                @foreach (CapaEntidad.Producto deseos in Model.Productos)
+                {
+                    <div class="cositas">
+                        <p id="IdProducto" hidden>@deseos.IdProducto</p>
+                        <p>@deseos.Nombre</p>
+                        <img class="i1" src='@deseos.RutaImagen' />
+                        <p>@deseos.Precio€</p>
+                        <div class="bf">
+                            <button onclick="Eliminar(@Model.usuarioId, @deseos.IdProducto)">Eliminar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+@section scripts
+{
 
+    <script>
+
+        @*var tabladata;
+      var filaSeleccionada;
+
+
+       tabladata = $("#tabla").DataTable({
+           responsive: true,
+           ordering: false,
+           "ajax": {
+               url: '@Url.Action("Cesta", "Tienda")',
+               type: "GET",
+               dataType: "json"
+           },
+           "columns": [
+               {
+                   "data": "RutaImagen",
+                   "render": function (data, type, row) {
+                       // Asegúrate de que la URL de la imagen está construida correctamente
+                       var imageUrl = data ? data : '/path/to/default/image.jpg'; // Asegúrate de que esta ruta sea correcta
+                       return '<img src="' + imageUrl + '" alt="Imagen del producto" style="width: 50px; height: 50px; object-fit: cover;" />';
+
+                   }
+               },
+               { "data": "Nombre" },
+               { "data": "Precio" },
+               {
+                   "data": "Activo", "render": function (valor) {
+                       if (valor) {
+                           return '<span class="badge text-bg-success">STOCK</span>'
+                       } else {
+                           return '<span class="badge text-bg-warning">NO STOCK</span>'
+                       }
+
+                   }
+               },
+                { "data": "Cantidad" },
+                { "data": "Total" },
+               {
+                   "defaultContent": '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="far fa-trash-alt"></i></button>',
+                   "orderable": false,
+                   "searchable": false,
+                   "width": "90px"
+               }
+           ],
+           "language": {
+               "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+           },
+       });*@
+               
+        $(document).ready(function() {
+            $("#tabla").DataTable({
+                responsive: true,
+                ordering: false,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                }
+            });
+        });
+    
+    </script>
+}

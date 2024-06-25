@@ -25,4 +25,4 @@ namespace CapaTienda.Controllers
             return Json(response);
         }
     }
-}
+} 

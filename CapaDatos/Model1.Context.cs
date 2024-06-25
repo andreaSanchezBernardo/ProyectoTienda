@@ -27,6 +27,7 @@ namespace CapaDatos
     
         public virtual DbSet<CARRITO> CARRITO { get; set; }
         public virtual DbSet<CATEGORIA> CATEGORIA { get; set; }
+        public virtual DbSet<CLIENTE> CLIENTE { get; set; }
         public virtual DbSet<DESEOS> DESEOS { get; set; }
         public virtual DbSet<DETALLE_VENTA> DETALLE_VENTA { get; set; }
         public virtual DbSet<MARCA> MARCA { get; set; }

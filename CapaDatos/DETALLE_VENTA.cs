@@ -19,8 +19,11 @@ namespace CapaDatos
         public Nullable<int> IdProducto { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Total { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
+        public Nullable<int> IdCarrito { get; set; }
     
-        public virtual PRODUCTO PRODUCTO { get; set; }
+        public virtual CARRITO CARRITO { get; set; }
         public virtual VENTA VENTA { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

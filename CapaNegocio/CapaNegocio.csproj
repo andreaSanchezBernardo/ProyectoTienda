@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_Carrito.cs" />
     <Compile Include="CN_Categorias.cs" />
     <Compile Include="CN_Marcas.cs" />
     <Compile Include="CN_Perfil.cs" />
