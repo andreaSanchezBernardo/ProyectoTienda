@@ -5,10 +5,12 @@
     ViewBag.Title = "Cesta";
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
 }
-
-<div>
-    <h2>CESTA DE LA COMPRA</h2>
-    <div>
+<div class="titulo">
+    <img />
+    <h1>TU CESTA DE LA COMPRA</h1>
+    <img src="~/iconos/lista.png" />
+</div>
+    <div class="ta">
         <table id="tabla" class="display cell-border" style="width: 100%">
             <thead>
                 <tr>
@@ -29,7 +31,7 @@
                             <img src="@producto.RutaImagen" alt="Imagen del producto" style="width: 50px; height: 50px; object-fit: cover;" />
                         </td>
                         <td>@producto.Nombre</td>
-                        <td>@producto.Precio</td>
+                        <td>@producto.Precio€</td>
                         <td>
                             @if (producto.Activo)
                             {
@@ -41,15 +43,17 @@
                             }
                         </td>
                         <td>
-                            <div>
-                                <input type="number" id="cantidad" />
+                            <div class="cantidad1">
+                                <input type="number" id="cantidad" value="1" min="0" />
                                 <div>
-                                    <button><img src="" /></button>
-                                    <button><img src="~/iconos/agregar.png" /></button>
+                                    <button onclick="btnMenos()" class="e2"><img  class="e1" src="~/iconos/boton-menos.png" /></button>
+                                    <button onclick="btnMas()" class="e2"><img class="e1" src="~/iconos/agregar.png" /></button>
                                 </div>
                             </div>
                         </td>
-                        <td></td>
+                        <td>
+                            <input type="number" />
+                        </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar">
                                 <i class="far fa-trash-alt"></i>
@@ -60,88 +64,35 @@
             </tbody>
         </table>
     </div>
-</div>
-@*<div>
-        <h2>LISTA DE DESEOS</h2>
-        <div class="contendor">
-            <div class="cont1">
-                @foreach (CapaEntidad.Producto deseos in Model.Productos)
-                {
-                    <div class="cositas">
-                        <p id="IdProducto" hidden>@deseos.IdProducto</p>
-                        <p>@deseos.Nombre</p>
-                        <img class="i1" src='@deseos.RutaImagen' />
-                        <p>@deseos.Precio€</p>
-                        <div class="bf">
-                            <button onclick="Eliminar(@Model.usuarioId, @deseos.IdProducto)">Eliminar</button>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>*@
+
 @section scripts
 {
 
     <script>
-
-        @*var tabladata;
-      var filaSeleccionada;
-
-
-       tabladata = $("#tabla").DataTable({
-           responsive: true,
-           ordering: false,
-           "ajax": {
-               url: '@Url.Action("Cesta", "Tienda")',
-               type: "GET",
-               dataType: "json"
-           },
-           "columns": [
-               {
-                   "data": "RutaImagen",
-                   "render": function (data, type, row) {
-                       // Asegúrate de que la URL de la imagen está construida correctamente
-                       var imageUrl = data ? data : '/path/to/default/image.jpg'; // Asegúrate de que esta ruta sea correcta
-                       return '<img src="' + imageUrl + '" alt="Imagen del producto" style="width: 50px; height: 50px; object-fit: cover;" />';
-
-                   }
-               },
-               { "data": "Nombre" },
-               { "data": "Precio" },
-               {
-                   "data": "Activo", "render": function (valor) {
-                       if (valor) {
-                           return '<span class="badge text-bg-success">STOCK</span>'
-                       } else {
-                           return '<span class="badge text-bg-warning">NO STOCK</span>'
-                       }
-
-                   }
-               },
-                { "data": "Cantidad" },
-                { "data": "Total" },
-               {
-                   "defaultContent": '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="far fa-trash-alt"></i></button>',
-                   "orderable": false,
-                   "searchable": false,
-                   "width": "90px"
-               }
-           ],
-           "language": {
-               "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-           },
-       });*@
-               
+        
         $(document).ready(function() {
             $("#tabla").DataTable({
                 responsive: true,
                 ordering: false,
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-                }
+                },
+                //columnDefs: [
+                //    { width: "20%", targets: 0 }, // Ancho de la columna Producto
+                //    { width: "25%", targets: 1 }, // Ancho de la columna Nombre
+                //    { width: "15%", targets: 2 }, // Ancho de la columna Precio
+                //    { width: "10%", targets: 3 }, // Ancho de la columna Disponible
+                //    { width: "10%", targets: 4 }, // Ancho de la columna Cantidad
+                //    { width: "10%", targets: 5 }, // Ancho de la columna Total
+                //    { width: "10%", targets: 6 }  // Ancho de la columna Acciones
+                //],
+                //fixedColumns: true
             });
         });
+
+           
+          
+     
     
     </script>
 }

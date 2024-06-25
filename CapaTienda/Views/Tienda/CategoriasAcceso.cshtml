@@ -11,13 +11,16 @@
         
     }
     .navegador {
+        position: relative;
+        bottom: 120px;
         background-color: #8C8CB9;
-        width:300px;
+        width: 300px;
         height: 750px;
-        display:flex;
-        align-content:flex-start;
-        flex-direction:column;
-        border-radius:10px;       
+        display: flex;
+        align-content: flex-start;
+        flex-direction: column;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
     }
     .navegador1 {
         display: flex;
@@ -54,6 +57,11 @@
         }
 </style>
 
+<div class="titulo">
+    <img />
+    <h1>TODOS LOS PRODUCTOS</h1>
+    <img src="~/iconos/taza.png"/>
+</div>
 <div class="filtro">
     <nav class="navegador">
         <h2 style="text-align:center">Búsqueda por filtro</h2>
@@ -86,7 +94,7 @@
                 <p>Rango Precio:</p>
                 <div class="navegador2">
                     <input type="range" id="filtro-precio" min="0" max="1000" value="0" oninput="actualizarValor()" />
-                    <span id="valor-precio">0</span>
+                    <span id="valor-precio">0€</span>
                     <input type="submit" id="filtro" value="Buscar" />
                 </div>
             </div>

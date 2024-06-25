@@ -10,10 +10,51 @@ namespace CapaTienda.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+
+        public ActionResult Inicio()
         {
             return View();
         }
+        public ActionResult Index()
+        {
+            CN_Productos cn_producto = new CN_Productos();
+            List<Producto> productos = cn_producto.Listar();
+
+            // Agrupación por marca
+            var marcaAgrupada = productos
+                .GroupBy(p => p.MarcaNombre)
+                .Select(g => new
+                {
+                    Nombre = g.Key,
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var totalProductos = productos.Count;
+            var nombresMarca = marcaAgrupada.Select(m => m.Nombre).ToList();
+            var porcentajesMarca = marcaAgrupada.Select(m => (m.Cantidad / (double)totalProductos) * 100).ToList();
+
+            // Agrupación por categoría
+            var categoriaAgrupada = productos
+                .GroupBy(p => p.CategoriaNombre)
+                .Select(g => new
+                {
+                    Nombre = g.Key,
+                    Cantidad = g.Count()
+                })
+                .ToList();
+
+            var nombresCategoria = categoriaAgrupada.Select(m => m.Nombre).ToList();
+            var porcentajesCategoria = categoriaAgrupada.Select(m => (m.Cantidad / (double)totalProductos) * 100).ToList();
+
+            ViewBag.NombresMarca = nombresMarca;
+            ViewBag.PorcentajesMarca = porcentajesMarca;
+            ViewBag.NombresCategoria = nombresCategoria;
+            ViewBag.PorcentajesCategoria = porcentajesCategoria;
+
+            return View();
+        }
+    
 
         public ActionResult Usuarios()
         {

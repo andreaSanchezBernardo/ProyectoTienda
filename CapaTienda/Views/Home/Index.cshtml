@@ -1,33 +1,114 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    // Obtener la fecha actual
+    DateTime fechaActualizacion = DateTime.Now;
 }
+<style>
+    .k2 {
+        margin-top: 25px;
+        margin-right: 15px;
+    }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    .graficos {
+        display: flex;
+        align-items:center;
+    }
+</style>
+<div class="graficos">
+    <div class="col-lg-6 k2">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-pie me-1"></i>
+                Marcas
+            </div>
+            <div style="width:50%; margin: auto;">
+                <canvas id="chartMarca"></canvas>
+            </div>
+            <div class="card-footer small text-muted" id="ultima-actualizacion">
+                Última actualización: @fechaActualizacion.ToString("dd/MM/yyyy HH:mm:ss")
+            </div>
+        </div>
     </div>
-</main>
+    <div class="col-lg-6 k2">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-pie me-1"></i>
+                Categorias
+            </div>
+            <div style="width: 50%; margin: auto;">
+                <canvas id="chartCategoria"></canvas>
+            </div>
+            <div class="card-footer small text-muted" id="ultima-actualizacion">
+                Última actualización: @fechaActualizacion.ToString("dd/MM/yyyy HH:mm:ss")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        var ctxMarca = document.getElementById('chartMarca').getContext('2d');
+        var ctxCategoria = document.getElementById('chartCategoria').getContext('2d');
+
+        var nombresMarca = @Html.Raw(Json.Encode(ViewBag.NombresMarca));
+        var porcentajesMarca = @Html.Raw(Json.Encode(ViewBag.PorcentajesMarca));
+
+        var nombresCategoria = @Html.Raw(Json.Encode(ViewBag.NombresCategoria));
+        var porcentajesCategoria = @Html.Raw(Json.Encode(ViewBag.PorcentajesCategoria));
+
+        // Colores para el gráfico de productos por marca
+        var coloresMarca = [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+            'rgba(255, 159, 64, 0.8)'
+        ];
+
+        // Colores para el gráfico de productos por categoría
+        var coloresCategoria = [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+            'rgba(255, 159, 64, 0.8)'
+        ];
+
+        var chartMarca = new Chart(ctxMarca, {
+            type: 'pie',
+            data: {
+                labels: nombresMarca,
+                datasets: [{
+                    label: 'Productos por Marca',
+                    data: porcentajesMarca,
+                    backgroundColor: coloresMarca
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        var chartCategoria = new Chart(ctxCategoria, {
+            type: 'pie',
+            data: {
+                labels: nombresCategoria,
+                datasets: [{
+                    label: 'Productos por Categoría',
+                    data: porcentajesCategoria,
+                    backgroundColor: coloresCategoria
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+}

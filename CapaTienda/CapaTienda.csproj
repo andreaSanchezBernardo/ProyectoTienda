@@ -336,13 +336,17 @@
     <Content Include="iconos\agregar.png" />
     <Content Include="iconos\bolsa-de-la-compra.png" />
     <Content Include="iconos\borrar.png" />
+    <Content Include="iconos\boton-menos.png" />
     <Content Include="iconos\carro-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-comprap.png" />
     <Content Include="iconos\discos-compactos.png" />
     <Content Include="iconos\estrellao.png" />
     <Content Include="iconos\estrellap.png" />
+    <Content Include="iconos\gato.png" />
     <Content Include="iconos\hogar.png" />
+    <Content Include="iconos\lista.png" />
     <Content Include="iconos\marcos.png" />
+    <Content Include="iconos\taza.png" />
     <Content Include="iconos\usuario.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -528,6 +532,7 @@
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Tienda\MarcasAcceso.cshtml" />
     <Content Include="Views\Tienda\CategoriasAcceso.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
