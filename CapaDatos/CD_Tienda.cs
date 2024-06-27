@@ -330,5 +330,74 @@ namespace CapaDatos
             }
             return resultado;
         }
+
+        public CategoriasYproductosYmarcas DentroMarca(int IdMarca)
+        {
+            CategoriasYproductosYmarcas resultado = new CategoriasYproductosYmarcas();
+            List<PRODUCTO> listProducto = null;
+            List<Producto> producto = new List<Producto>();
+            List<CATEGORIA> listCategorias = null;
+            List<Categoria> categorias = new List<Categoria>();
+            List<MARCA> listMarcas = null;
+            List<Marca> marcas = new List<Marca>();
+
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                   
+                    listMarcas = db.MARCA.Where(p => (bool)p.Activo && p.IdMarca == IdMarca).ToList();
+
+                    
+                    listProducto = db.PRODUCTO.Where(p => (bool)p.Activo && p.IdMarca == IdMarca).OrderBy(n => n.Nombre).ToList();
+
+                    
+                    var categoriaIds = listProducto.Select(p => p.IdCategoria).Distinct().ToList();
+                    listCategorias = db.CATEGORIA.Where(p => (bool)p.Activo && categoriaIds.Contains(p.IdCategoria)).ToList();
+
+                    producto = listProducto.Select(p => new Producto
+                    {
+                        IdProducto = p.IdProducto,
+                        Nombre = p.Nombre,
+                        Descripcion = p.Descripcion,
+                        IdMarca = p.IdMarca.Value,
+                        IdCategoria = (int)p.IdCategoria,
+                        Precio = (decimal)p.Precio,
+                        PrecioString = p.Precio.ToString(),
+                        Stock = (int)p.Stock,
+                        RutaImagen = p.RutaImagen,
+                        NombreImagen = p.NombreImagen,
+                        Activo = (bool)p.Activo,
+                        FechaRegistro = (DateTime)p.FechaRegistro
+                    }).ToList();
+
+                    categorias = listCategorias.Select(c => new Categoria
+                    {
+                        IdCategoria = c.IdCategoria,
+                        Descripcion = c.Descripcion,
+                        Activo = (bool)c.Activo,
+                        FechaRegistro = (DateTime)c.FechaRegistro
+                    }).ToList();
+
+                    marcas = listMarcas.Select(m => new Marca
+                    {
+                        IdMarca = m.IdMarca,
+                        Descripcion = m.Descripcion,
+                        Activo = (bool)m.Activo,
+                        FechaRegistro = (DateTime)m.FechaRegistro
+                    }).ToList();
+
+                    resultado.Productos = producto;
+                    resultado.ListaCategorias = categorias;
+                    resultado.ListaMarcas = marcas;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return resultado;
+        }
     }
 }

@@ -16,11 +16,11 @@
             <div class="cositas6 marca-@marca.IdMarca">
                 <p id="IdProducto" hidden>@marca.IdMarca</p>
                 <p>@marca.Descripcion</p>
-                <img class="i5" src='@marca.RutaImagen' />
-                <div class="horizontal-line"></div>
-                <div class="bf">
+                <a href="@Url.Action("DentroMarca", "Tienda", new { IdMarca = marca.IdMarca })"><img class="i5" src='@marca.RutaImagen' /></a>
+                @*<div class="horizontal-line"></div>*@
+                @*<div class="bf">
                     <button class="btn4"><img src="~/iconos/estrellap.png" />Ver todos los productos</button>
-                </div>
+                </div>*@
             </div>
         }
     </div>

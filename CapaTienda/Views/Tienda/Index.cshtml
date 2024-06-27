@@ -6,8 +6,19 @@
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
 }
 
+<style>
+    .titulo2 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top:15px;
+    }
+</style>
+<div class="titulo2">
+    <img src="~/iconos/flecha-izquierda.png" />
+    <a style="color: #F5F5FD;text-decoration:none;" href="@Url.Action("Inicio","Home")">Volver a CRUD administración</a>
+</div>
 <div class="titulo">
-    <img />
     <h1>LET'S PLAY</h1>
     <img src="~/iconos/discos-compactos.png" />
 </div>
@@ -27,8 +38,8 @@
                 <p>@producto.Precio€</p>
                 <div class="horizontal-line"></div>
                 <div class="bf">
-                    <button class="btn4" onclick="AñadirListaDeseos(@producto.IdProducto)"><img src="~/iconos/estrellap.png"/></button>
-                    <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png"/></button>
+                    <button class="btn4" onclick="AñadirListaDeseos(@producto.IdProducto)"><img src="~/iconos/estrellap.png" /></button>
+                    <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png" /></button>
                 </div>
             </div>
         }

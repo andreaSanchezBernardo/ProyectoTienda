@@ -78,19 +78,17 @@ namespace CapaTienda.Controllers
             return View(oProducto);
         }
 
-        public ActionResult PaginaCategoria(int idCategoria)
+        public ActionResult PaginaCategoria()
         {
-            CN_Tienda cN_Tienda = new CN_Tienda();
-            CategoriaConProductos resultado = cN_Tienda.MostrarCategorias(idCategoria);
-            ViewBag.NombreCategoria = resultado.NombreCategoria;
-            return View(resultado.Productos);
+            CN_Tienda cN_tienda = new CN_Tienda();
+            CategoriasYproductosYmarcas resultado = cN_tienda.CategoriaAcceso();
+            return View(resultado);
         }
-        public ActionResult PaginaMarca(int idMarca)
+        public ActionResult PaginaMarca()
         {
-            CN_Tienda cN_Tienda = new CN_Tienda();
-            MarcaConProductos resultado = cN_Tienda.MostrarMarcas(idMarca);
-            ViewBag.NombreMarca = resultado.NombreMarca;
-            return View(resultado.Productos);
+            List<Marca> oMarca = new List<Marca>();
+            oMarca = new CN_Tienda().MarcasPagina();
+            return View(oMarca);
         }
 
         public ActionResult Cesta()
@@ -127,6 +125,20 @@ namespace CapaTienda.Controllers
             List<Marca> oMarca = new List<Marca>();
             oMarca = new CN_Tienda().MarcasPagina();
             return View(oMarca);
+        }
+
+        public ActionResult DentroMarca(int IdMarca)
+        {
+            CN_Tienda cN_Tienda = new CN_Tienda();
+            var resultado = cN_Tienda.DentroMarca(IdMarca);
+            return View(resultado);
+        }
+
+        public ActionResult Marcas(int IdMarca)
+        {
+            CN_Tienda cN_Tienda = new CN_Tienda();
+            var resultado = cN_Tienda.DentroMarca(IdMarca);
+            return View(resultado);
         }
 
         public ActionResult CategoriasAcceso()

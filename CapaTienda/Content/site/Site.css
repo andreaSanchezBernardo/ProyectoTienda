@@ -49,7 +49,7 @@
     --bs-warning-rgb: 255, 193, 7;
     --bs-danger-rgb: 220, 53, 69;
     --bs-light-rgb: 248, 249, 250;
-    --bs-dark-rgb: 33, 37, 41;
+    --bs-dark-rgb: 92, 107, 192;
     --bs-white-rgb: 255, 255, 255;
     --bs-black-rgb: 0, 0, 0;
     --bs-body-color-rgb: 33, 37, 41;
@@ -4656,6 +4656,7 @@ textarea.form-control-lg {
         }
 
 .navbar-dark {
+    border:solid 2px black;
     --bs-navbar-color: rgba(255, 255, 255, 0.55);
     --bs-navbar-hover-color: rgba(255, 255, 255, 0.75);
     --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);
@@ -4888,6 +4889,7 @@ textarea.form-control-lg {
     --bs-accordion-body-padding-y: 1rem;
     --bs-accordion-active-color: #0c63e4;
     --bs-accordion-active-bg: #e7f1ff;
+    border:solid 2px black;
 }
 
 .accordion-button {
@@ -7582,6 +7584,7 @@ textarea.form-control-lg {
     right: 0;
     left: 0;
     z-index: 1030;
+    
 }
 
 .fixed-bottom {
@@ -12507,6 +12510,7 @@ body {
 
 .sb-nav-fixed .sb-topnav {
     z-index: 1039;
+   
 }
 
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
@@ -12554,7 +12558,7 @@ body {
 
 .sb-topnav {
     padding-left: 0;
-    height: 56px;
+    height: 66px;
     z-index: 1039;
 }
 
@@ -12627,8 +12631,10 @@ body {
     }
 
 .sb-sidenav-dark {
-    background-color: #212529;
+    
+    background-color: #5C6BC0;
     color: rgba(255, 255, 255, 0.5);
+    
 }
 
     .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {

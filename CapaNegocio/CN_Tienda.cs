@@ -87,5 +87,11 @@ namespace CapaNegocio
             CD_Tienda cd_tienda = new CD_Tienda();
             return cd_tienda.CategoriasAcceso();
         }
+
+        public CategoriasYproductosYmarcas DentroMarca(int IdMarca)
+        {
+            CD_Tienda cd_Tienda = new CD_Tienda();
+            return cd_Tienda.DentroMarca(IdMarca);
+        }
     }
 }

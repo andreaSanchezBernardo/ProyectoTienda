@@ -335,19 +335,28 @@
     <Content Include="Content\Astonpoliz.ttf" />
     <Content Include="iconos\agregar.png" />
     <Content Include="iconos\bolsa-de-la-compra.png" />
+    <Content Include="iconos\bomba.png" />
     <Content Include="iconos\borrar.png" />
     <Content Include="iconos\boton-menos.png" />
+    <Content Include="iconos\capucha.png" />
     <Content Include="iconos\carro-de-la-compra.png" />
     <Content Include="iconos\carro-de-la-comprap.png" />
     <Content Include="iconos\discos-compactos.png" />
     <Content Include="iconos\estrellao.png" />
     <Content Include="iconos\estrellap.png" />
+    <Content Include="iconos\flecha-izquierda.png" />
     <Content Include="iconos\gato.png" />
     <Content Include="iconos\hogar.png" />
+    <Content Include="iconos\informe.png" />
+    <Content Include="iconos\libro.png" />
     <Content Include="iconos\lista.png" />
     <Content Include="iconos\marcos.png" />
+    <Content Include="iconos\medalla.png" />
     <Content Include="iconos\taza.png" />
+    <Content Include="iconos\tazaq.png" />
     <Content Include="iconos\usuario.png" />
+    <Content Include="iconos\videojuego.png" />
+    <Content Include="iconos\videojuegos.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -533,6 +542,8 @@
     <Content Include="Views\Tienda\MarcasAcceso.cshtml" />
     <Content Include="Views\Tienda\CategoriasAcceso.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Tienda\DentroMarca.cshtml" />
+    <Content Include="Views\Tienda\Marcas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

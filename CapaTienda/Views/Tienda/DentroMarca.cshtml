@@ -1,0 +1,72 @@
+﻿@model CapaEntidad.CategoriasYproductosYmarcas
+@{
+    ViewBag.Title = "DentroMarca";
+    Layout = "~/Views/Shared/_Layout_acceso.cshtml";
+}
+
+<style>
+    .nombre {
+        font-size: 35px;
+        color: #9393DB;
+    }
+    .borde {
+        width: 100%;
+        background-color: #F5F5FD;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+        height: 20px;
+        height: 70px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 15px;
+    }
+
+</style>
+
+<div class="titulo">
+    <h1>@Model.ListaMarcas.FirstOrDefault().Descripcion</h1>
+    <img src="~/iconos/discos-compactos.png" />
+</div>
+<div>
+    @foreach (var categoria in Model.ListaCategorias)
+    {
+        <div class="borde">
+            <p class="nombre">@categoria.Descripcion</p>
+            @switch (categoria.Descripcion)
+            {
+                case "Ropa":
+                    <img src="~/iconos/capucha.png" />
+                    break;
+                case "Merchandising":
+                    <img src="~/iconos/tazaq.png" />
+                    break;
+                case "Accesorios":
+                    <img src="~/iconos/videojuego.png" />
+                    break;
+                case "Videojuegos":
+                    <img src="~/iconos/videojuego.png" />
+                    break;
+                case "Consolas":
+                    <img src="~/iconos/videojuegos.png" />
+                    break;
+            }
+        </div>
+        <div class="cs">
+            @foreach (var producto in Model.Productos.Where(p => p.IdCategoria == categoria.IdCategoria))
+            {
+               <div class="cositas5">
+                   <p id="IdProducto" hidden>@producto.IdProducto</p>
+                   <p>@producto.Nombre</p>
+                   <img class="i1" src='@producto.RutaImagen' />
+                   <p>@producto.Precio€</p>
+                   <div class="horizontal-line"></div>
+                   <div class="bf">
+                       <button class="btn4" onclick="AñadirListaDeseos(@producto.IdProducto)"><img src="~/iconos/estrellap.png" /></button>
+                       <button class="btn4"><img src="~/iconos/carro-de-la-comprap.png" /></button>
+                   </div>
+               </div>
+            }
+        </div>
+    }
+</div>

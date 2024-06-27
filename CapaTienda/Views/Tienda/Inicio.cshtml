@@ -5,11 +5,36 @@
 
     Layout = "~/Views/Shared/_Layout_tienda.cshtml";
 }
-<a style="color:black; font-size:30px" href="@Url.Action("Index","Home")">###</a>
-<div class="titulo">
-    <img />
-    <h1>LET'S PLAY</h1>
-    <img src="~/iconos/discos-compactos.png" />
+<style>
+    .titulo2{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+</style>
+<div class="exp">
+    <div  class="titulo2">
+        <img src="~/iconos/flecha-izquierda.png" />
+        <a style="color: #F5F5FD;text-decoration:none;" href="@Url.Action("Inicio","Home")">Volver a CRUD administración</a>
+    </div>
+    <div class="titulo">
+        <h1>LET'S PLAY</h1>
+        <img src="~/iconos/discos-compactos.png" />
+    </div>
+    <div class="titulo4" >
+        <p><strong>Datos para iniciar sesion:</strong></p>
+        <br />
+        <p>Usuario:a@gmail.com</p>
+        <p>Contraseña:00</p>
+        <br />
+        <p>
+            También puedes crear un nuevo usuario siguiendo estos pasos:
+            <br />
+            1. Dirígete a la sección "Inicio de Sesión".
+            <br />
+            2. En el modal que aparece, haz clic en "Crear Cuenta".
+        </p>
+    </div>
 </div>
 <div class="contendor">
 
