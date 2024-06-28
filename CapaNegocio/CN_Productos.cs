@@ -31,6 +31,7 @@ namespace CapaNegocio
             return response;
         }
 
+
         public Response Editar(Producto producto)
         {
             CD_Productos cD_productos = new CD_Productos();

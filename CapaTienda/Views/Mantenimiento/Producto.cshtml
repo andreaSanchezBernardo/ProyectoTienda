@@ -268,8 +268,7 @@
                 var insertarImagen = $('#fileProducto')[0].files[0];
                 var IdProducto = $('#IdProducto').val();
                 var precio = $('#txtprecio').val();
-                console.log(precio)
-                console.log(parseFloat(precio))
+
                 formData.append("IdProducto", IdProducto);
                 formData.append("Nombre", $('#txtnombre').val());
                 formData.append("Descripcion", $('#txtdescripcion').val());
@@ -278,10 +277,12 @@
                 formData.append("IdCategoria", $('#txtcategoria').val());
                 formData.append("Stock", $('#txtstock').val());
                 formData.append("PrecioString", precio);
+
+                // Solo agregar la imagen si se ha seleccionado una nueva
                 if (insertarImagen) {
                     formData.append("Imagen", insertarImagen);
                 }
-                console.log(formData)
+                console.log(insertarImagen)
                 var url = IdProducto ? '@Url.Action("EditarProducto", "Mantenimiento")' : '@Url.Action("AgregarProducto", "Mantenimiento")';
 
                 console.log("URL de la solicitud:", url); // Depuración: Verificar la URL genera

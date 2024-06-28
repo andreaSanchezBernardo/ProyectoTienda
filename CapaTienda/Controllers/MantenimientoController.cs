@@ -177,7 +177,8 @@ namespace CapaTienda.Controllers
         public JsonResult EditarProducto(Producto producto, HttpPostedFileBase Imagen)
         {
             if (Imagen != null && Imagen.ContentLength > 0)
-            {  // Ruta de la carpeta de destino
+            {                
+                // Ruta de la carpeta de destino
                 string carpeta = Server.MapPath("~/wwwroot/imagenes");
                 if (!Directory.Exists(carpeta))
                 {
@@ -199,6 +200,7 @@ namespace CapaTienda.Controllers
             Response response = cN_Productos.Editar(producto);
             return Json(response);
         }
+
 
         public JsonResult EliminarProducto(int IdProducto)
         {

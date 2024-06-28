@@ -183,17 +183,18 @@
 
         function guardarMarca() {
 
-        var IdMarca = $('#IdMarca').val();
-        var insertarImagen = $('#fileProducto')[0].files[0];
+            var formData = new FormData();
+            var insertarImagen = $('#fileProducto')[0].files[0];
+            var IdMarca = $('#IdMarca').val();
 
-        var formData = new FormData();
-        formData.append("IdMarca", IdMarca);
-        formData.append("Descripcion", $('#txtdescripcion').val());
-        formData.append("Activo", $('#cbActivo').val() === '1');
+            formData.append("IdMarca", IdMarca);
+            formData.append("Descripcion", $('#txtdescripcion').val());
+            formData.append("Activo", $('#cbActivo').val() === '1');
 
-        if (insertarImagen) {
-             formData.append("Imagen", insertarImagen);
-        }
+            // Solo agregar la imagen si se ha seleccionado una nueva
+            if (insertarImagen) {
+                formData.append("Imagen", insertarImagen);
+            }
 
         var url = IdMarca ? '@Url.Action("EditarMarca", "Mantenimiento")' : '@Url.Action("AgregarMarca", "Mantenimiento")';
 

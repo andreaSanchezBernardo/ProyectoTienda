@@ -176,6 +176,8 @@ namespace CapaDatos
         }
 
 
+
+
         public Response Elimnar(int IdProducto)
         {
             Response response = new Response();
