@@ -63,7 +63,7 @@ namespace CapaDatos
                         // Manejar el caso en que la descripcion ya existe
                         Console.WriteLine("La marca ya está registrada.");
                         response.success = false;
-                        response.mensaje = "La marca ya está registrada.";
+                        response.message = "La marca ya está registrada.";
 
                     }
                     else
@@ -79,7 +79,7 @@ namespace CapaDatos
                         db.SaveChanges(); // Guarda los cambios en la base de datos
 
                         response.success = true;
-                        response.mensaje = "Se ha creado la marca correctamente";
+                        response.message = "Se ha creado la marca correctamente";
                     }
                     return response; // La operación fue exitosa
                 }
@@ -88,7 +88,7 @@ namespace CapaDatos
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
                 response.success = false;
-                response.mensaje = "Ha ocurrido un error: " + ex.Message;
+                response.message = "Ha ocurrido un error: " + ex.Message;
 
                 return response;
             }
@@ -112,13 +112,13 @@ namespace CapaDatos
 
                         db.SaveChanges(); // Guarda los cambios en la base de datos
                         response.success = true;
-                        response.mensaje = "Se ha actualizado correctamente";
+                        response.message = "Se ha actualizado correctamente";
                         return response; // La operación fue exitosa
                     }
                     else
                     {
                         response.success = false;
-                        response.mensaje = "No se encontró la marca";
+                        response.message = "No se encontró la marca";
                         return response;
                     }
                 }
@@ -126,7 +126,7 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
-                response.mensaje = "Ha ocurrido un error " + ex.Message;
+                response.message = "Ha ocurrido un error " + ex.Message;
                 return response; // Ocurrió un error
             }
         }
@@ -145,12 +145,12 @@ namespace CapaDatos
                         db.MARCA.Remove(marca);
                         db.SaveChanges();
                         response.success = true;
-                        response.mensaje = "Marca eliminada correctamente.";
+                        response.message = "Marca eliminada correctamente.";
                     }
                     else
                     {
                         response.success = false;
-                        response.mensaje = "No se encontró la marca";
+                        response.message = "No se encontró la marca";
 
                     }
 
@@ -159,7 +159,7 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
-                response.mensaje = "Ha ocurrido un error " + ex.Message;
+                response.message = "Ha ocurrido un error " + ex.Message;
                 return response; // Ocurrió un error
             }
             return response;

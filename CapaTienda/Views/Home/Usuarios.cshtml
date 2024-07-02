@@ -212,10 +212,10 @@
                 success: function (response) {
                     if (response.success) {
                         $('#modalAgregar').modal('hide');// Cierra el modal
-                        alert(response.mensaje)
+                        alert(response.message)
                         tabladata.ajax.reload();// Recarga la tabla
                     } else {
-                        $('#modalAlert').text(response.mensaje);
+                        $('#modalAlert').text(response.message);
                         $('#modalAlert').show();
 
                     }

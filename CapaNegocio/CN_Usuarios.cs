@@ -34,5 +34,12 @@ namespace CapaNegocio
             return new CD_Usuarios().Eliminar(idUsuario);
         }
 
+        public Response EliminarDeseo(int idUsuario, int idProducto)
+        {
+            CD_Usuarios cD_Usuarios = new CD_Usuarios();
+            return cD_Usuarios.EliminarDeseo(idUsuario, idProducto);
+        }
+
     }
+    
 }

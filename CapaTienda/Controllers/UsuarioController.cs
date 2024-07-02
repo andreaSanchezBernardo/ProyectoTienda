@@ -24,5 +24,13 @@ namespace CapaTienda.Controllers
             Response response = cd_perfil.CambiarImagenPerfil(usuarioId, rutaImagen);
             return Json(response);
         }
+
+        [HttpPost]
+        public JsonResult EliminarDeseo(int idUsuario, int idProducto)
+        {
+            CN_Usuarios cN_Usuarios = new CN_Usuarios();
+            Response response = cN_Usuarios.EliminarDeseo(idUsuario, idProducto);
+            return Json(response);
+        }
     }
 } 

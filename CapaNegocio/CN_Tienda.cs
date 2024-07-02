@@ -28,18 +28,18 @@ namespace CapaNegocio
                 if (response.success && response.data is Usuario usuario)
                 {
                     response.data = usuario; // Asigna el objeto USUARIO a response.data
-                    response.mensaje = "Usuario autenticado exitosamente";
+                    response.message = "Usuario autenticado exitosamente";
                 }
                 else
                 {
                     response.success = false;
-                    response.mensaje = "Usuario o contraseña inválidos";
+                    response.message = "Usuario o contraseña inválidos";
                 }
             }
             catch (Exception ex)
             {
                 response.success = false;
-                response.mensaje = "Ha ocurrido un error: " + ex.Message;
+                response.message = "Ha ocurrido un error: " + ex.Message;
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
 

@@ -19,23 +19,24 @@ namespace CapaDatos
 
                     // Verifica si existe un usuario con el correo y la clave proporcionados
                     var usuario = db.USUARIO.FirstOrDefault(d => d.Correo == correo && d.Clave == clave);
-                    Usuario usuario1 = new Usuario()
-                    {
-                        IdUsuario = usuario.IdUsuario,
-                    };
+                   
 
                     if (usuario != null)
                     {
+                        Usuario usuario1 = new Usuario()
+                        {
+                            IdUsuario = usuario.IdUsuario,
+                        };
                         // El usuario fue encontrado, realiza las acciones necesarias aquí
                         response.success = true;
-                        response.mensaje = "Usuario autenticado exitosamente";
+                        response.message = "Usuario autenticado exitosamente";
                         response.data = usuario1;
                     }
                     else
                     {
                         // El usuario no fue encontrado
                         response.success = false;
-                        response.mensaje = "Usuario o contraseña inválidos";
+                        response.message = "Usuario o contraseña inválidos";
                     }
                 }
             }
@@ -43,7 +44,7 @@ namespace CapaDatos
             {
                 // Manejo de excepciones
                 response.success = false;
-                response.mensaje = "Ha ocurrido un error: " + ex.Message;
+                response.message = "Ha ocurrido un error: " + ex.Message;
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
 
@@ -172,7 +173,7 @@ namespace CapaDatos
                     {
                         Console.WriteLine("El producto ya está registrado.");
                         response.success = false;
-                        response.mensaje = "El producto ya está registrado.";
+                        response.message = "El producto ya está registrado.";
                     }
                     else
                     {
@@ -186,7 +187,7 @@ namespace CapaDatos
                         db.SaveChanges();
 
                         response.success = true;
-                        response.mensaje = "Producto añadido a la lista de deseos correctamente";
+                        response.message = "Producto añadido a la lista de deseos correctamente";
                     }
                 }
             }

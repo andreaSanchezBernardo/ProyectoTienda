@@ -24,7 +24,7 @@ namespace CapaDatos
 
                         Console.WriteLine("El producto ya está registrado la cesta.");
                         response.success = false;
-                        response.mensaje = "El producto ya está en la cesta.";
+                        response.message = "El producto ya está en la cesta.";
                     }
                     else
                     {
@@ -38,7 +38,7 @@ namespace CapaDatos
                         db.SaveChanges();
 
                         response.success = true;
-                        response.mensaje = "Producto añadido a la cesta";
+                        response.message = "Producto añadido a la cesta";
                     }
                     }
                 }

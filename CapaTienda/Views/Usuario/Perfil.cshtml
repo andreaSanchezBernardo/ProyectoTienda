@@ -3,62 +3,120 @@
 @{
     ViewBag.Title = "Perfil";
     Layout = "~/Views/Shared/_Layout_acceso.cshtml";
-    
+
 }
 <style>
-    .imagenes-opcion{
+    .imagenes-opcion {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        width: 50%;
+        width: 100%;
     }
-    .btn7{
-        margin-top:15px;
-        height:45px;
-        width:120px;
-        font-size:30px;
-        border-radius:10px;
-    }
-    .datos {
-        margin-right: 40px;
-        padding: 40px;
-        font-size: 25px;
-        border-top: 2px solid black;
-        border-right: 2px solid black;
-        background-color: #9393DB;
+
+    .btn7 {
+        margin-top: 15px;
+        height: 45px;
+        width: 120px;
+        font-size: 20px;
         border-radius: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
     }
+
+        .btn7:hover {
+            background-color: #45a049;
+        }
+
+    .datos {
+        padding: 20px;
+        font-size: 18px;
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+        .datos p {
+            margin: 10px 0;
+        }
+
+        .datos .label {
+            font-weight: bold;
+            color: #555;
+        }
+
     .opciones-imagenes {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         flex-wrap: wrap;
-        width: 50%;
-        
+        width: 100%;
     }
+
+    .nombre {
+        font-size: 35px;
+        color: #F5F5FD;
+        padding: 15px 0;
+        text-align: center;
+    }
+
     .btn8 {
         width: 40px;
-        height: 40px;
+        height: 35px;
         border: none;
-        background-color: #F5F5FD;
+        background-color: #f5f5fd;
     }
+
     .infor {
-        width: 50%;
-        height: 100%;
-        padding: 5px;
-        border-bottom: 2px solid black;
-        border-right: 2px solid black;
-        border-top: 2px solid black;
-        border-left: 2px solid black;
-        margin-right: 40px;
-        background-color: #8C8CB9;
+        padding: 20px;
+        border: 1px solid #9393db;
+        background-color: #9393db;
         border-radius: 10px;
+        width: 100%;
+        margin: 0 10px 10px 10px;
+    }
+
+    .wishlist-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .wishlist-table th, .wishlist-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .wishlist-table th {
+            background-color: #f2f2f2;
+        }
+
+        .wishlist-table img {
+            width: 50px;
+            height: 50px;
+        }
+
+    .color {
+        background-color: #9393db;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .color2 {
+        background-color: #9393db;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 45px 20px 0 20px;
     }
 </style>
 <div class="per">
-    <h2>¡HOLA!</h2>
+    <h2>¡HOLA DE NUEVO!</h2>
     <div>
         <div>
             <img id="img_producto" src="@Model.Usuario.RutaImagen" height="192" width="200" class="border rounded mx-auto d-block img-fluid" />
@@ -70,62 +128,87 @@
 <div class="contendor3">
 
     <div class="cont3">
-            <div class="cositas3">
-                <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
-                <div class="opciones-imagenes">
-                    <div class="imagenes-opcion">
-                        <img src="~/wwwroot/imagenesPerfil/asombrado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asombrado.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/asustado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asustado.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/enojado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/enojado.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/muerte.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/muerte.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/zombi.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/zombi.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/dracula.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/dracula.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/feliz.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/feliz.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/irritado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/irritado.png')" />
-                        <img src="~/wwwroot/imagenesPerfil/triste.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/triste.png')" />
-                    </div>
-                    <div>
-                        <button class="btn7" onclick="guardarImagenPerfil()">Guardar</button>
-                    </div>
-                    
+        <div class="titulo color2">
+            <h2 class="nombre">PERSONALIZAR PERFIL</h2>
+        </div>
+        <div class="cositas3">
+            <input type="hidden" id="usuarioId" value="@Session["UserId"]" />
+            <div class="opciones-imagenes">
+                <div class="imagenes-opcion">
+                    <img src="~/wwwroot/imagenesPerfil/asombrado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asombrado.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/asustado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/asustado.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/enojado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/enojado.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/muerte.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/muerte.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/zombi.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/zombi.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/dracula.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/dracula.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/feliz.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/feliz.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/irritado.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/irritado.png')" />
+                    <img src="~/wwwroot/imagenesPerfil/triste.png" class="img-opcion" onclick="seleccionarImagen('/wwwroot/imagenesPerfil/triste.png')" />
                 </div>
-                <div class="infor">                   
-                        <h3>Datos Personales:</h3>                  
-                    <div class="datos">
-                        <p>Nombre:@Model.Usuario.Nombres</p>
-                        <p>Apellido:@Model.Usuario.Apellidos</p>
-                        <p>Email:@Model.Usuario.Correo</p>
-                        <div class="bf">
-                            <button class="btn7" ><img src="" />Editar</button>
-                        </div>
-                    </div>                  
+                <div>
+                    <button class="btn7" onclick="guardarImagenPerfil()">Guardar</button>
+                </div>
+
+            </div>
+            <div class="infor">
+                <h3 style="color: #F5F5FD;">Datos Personales:</h3>
+                <div class="datos">
+                    <p>Nombre:@Model.Usuario.Nombres</p>
+                    <p>Apellido:@Model.Usuario.Apellidos</p>
+                    <p>Email:@Model.Usuario.Correo</p>
+                    <div class="bf">
+                        <button class="btn7"><img src="" />Editar</button>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
     <div class="cont3 w">
-        <h2>LISTA DE DESEOS</h2>
-        <div class="deseop">
-            @foreach (CapaEntidad.Producto deseos in Model.ListaDeseos.Productos)
-            {
-                <div class="cositas4">
-                    <div style="background-image:@deseos.RutaImagen" class="cosii">
-                        <p id="IdProducto" hidden>@deseos.IdProducto</p>
-                        <img class="i2" src='@deseos.RutaImagen' />
-                        
-                    </div>
-                    <div class="bf">
-                        <button class="btn8" onclick="Eliminar(@Model.Usuario.IdUsuario, @deseos.IdProducto)"><img src="~/iconos/borrar.png" /></button>
-                    </div>
-                </div>
-            }
+        <div class="titulo color">
+            <h2 class="nombre">LISTA DE DESEOS</h2>
+            <img />
+        </div>
+        <table class="wishlist-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Nombre del Producto</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListaDeseos.Productos != null)
+                {
+                    foreach (CapaEntidad.Producto deseos in Model.ListaDeseos.Productos)
+                    {
+                        <tr>
+                            <td><img src='@deseos.RutaImagen' /></td>
+                            <td>@deseos.Nombre</td>
+                            <td>
+                                <button class="btn8 btn-eliminar" data-usuario-id="@Model.Usuario.IdUsuario" data-producto-id="@deseos.IdProducto">
+                                    <img src="~/iconos/borrar.png" />
+                                </button>
+                            </td>
+                        </tr>
+                    }
 
-        </div> 
+                }
+                else
+                {
+
+            
+
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+
+
 @section scripts
 {
     <script>
-        let imagenSeleccionada = null; 
+        let imagenSeleccionada = null;
 
     function seleccionarImagen(rutaImagen) {
         imagenSeleccionada = rutaImagen;
@@ -136,7 +219,7 @@
         if (imagenSeleccionada !== null) {
             const usuarioId = document.getElementById("usuarioId").value;
 
-            fetch('@Url.Action("AgregarImagenPerfil", "Usuario")', { 
+            fetch('@Url.Action("AgregarImagenPerfil", "Usuario")', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -158,6 +241,60 @@
         } else {
             alert('Por favor, selecciona una imagen primero');
         }
+     }
+
+        $(document).ready(function () {
+    $(".btn-eliminar").on("click", function () {
+        const productoSeleccionado = $(this).closest("tr");
+        const idUsuario = "@Model.Usuario.IdUsuario";
+        const idProducto = $(this).data("producto-id");
+
+        swal({
+            title: "¿Está seguro?",
+            text: "¿Desea eliminar el producto?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-primary",
+            confirmButtonText: "Sí!",
+            cancelButtonText: "No",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                eliminarProducto(idUsuario, idProducto); // Llama a la función para eliminar
+                swal("Eliminado!", "El producto ha sido eliminado correctamente.", "success");
+                location.reload(); // Recarga la página si es necesario
+            } else {
+                // Opcional: Mostrar un mensaje si el usuario cancela la eliminación
+                swal("Cancelado", "La eliminación del producto ha sido cancelada.", "info");
+            }
+        });
+    });
+
+    function eliminarProducto(idUsuario, idProducto) {
+        fetch('@Url.Action("EliminarDeseo", "Usuario")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            },
+            body: JSON.stringify({ idUsuario: idUsuario, idProducto: idProducto })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('La solicitud de eliminar producto no tuvo éxito.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data.success) {
+                throw new Error('Hubo un problema al eliminar : ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al eliminar el producto: ' + error.message);
+        });
     }
+});
     </script>
 }

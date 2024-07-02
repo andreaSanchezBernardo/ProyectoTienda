@@ -9,7 +9,7 @@ namespace CapaEntidad
     public class Response
     {
         public bool success { get; set; }
-        public string mensaje { get; set; }
+        public string message { get; set; }
         public object data { get; set; } // Agrega una propiedad 'data' para almacenar el usuario
     }
 }

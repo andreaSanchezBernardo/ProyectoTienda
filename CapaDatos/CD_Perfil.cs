@@ -61,7 +61,7 @@ namespace CapaDatos
                     {
                         Console.WriteLine("El producto ya está registrado.");
                         response.success = false;
-                        response.mensaje = "El producto ya está registrado.";
+                        response.message = "El producto ya está registrado.";
                     }
                     else
                     {
@@ -75,7 +75,7 @@ namespace CapaDatos
                         db.SaveChanges();
 
                         response.success = true;
-                        response.mensaje = "Producto añadido a la lista de deseos correctamente";
+                        response.message = "Producto añadido a la lista de deseos correctamente";
                     }
                 }
             }
@@ -143,19 +143,19 @@ namespace CapaDatos
                         usuario.RutaImagen = rutaImagen;
                         db.SaveChanges();
                         response.success = true;
-                        response.mensaje = "Imagen de perfil actualizada con éxito";
+                        response.message = "Imagen de perfil actualizada con éxito";
                     }
                     else
                     {
                         response.success = false;
-                        response.mensaje = "Usuario no encontrado";
+                        response.message = "Usuario no encontrado";
                     }
                 }
             }
             catch (Exception ex)
             {
                 response.success = false;
-                response.mensaje = $"Hubo un problema al actualizar la imagen de perfil: {ex.Message}";
+                response.message = $"Hubo un problema al actualizar la imagen de perfil: {ex.Message}";
             }
 
             return response;

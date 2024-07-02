@@ -60,7 +60,7 @@ namespace CapaDatos
                         // Manejar el caso en que el correo ya existe
                         Console.WriteLine("El correo ya está registrado.");
                         response.success = false;
-                        response.mensaje = "El correo ya está registrado.";
+                        response.message = "El correo ya está registrado.";
 
                     }
                     else
@@ -71,7 +71,7 @@ namespace CapaDatos
                             Apellidos = usuario.Apellidos,
                             Correo = usuario.Correo,
                             Activo = usuario.Activo,
-                            Clave = usuario.Clave, // Asegúrate de manejar la clave adecuadamente
+                            Clave = usuario.Clave, 
                             Reestablecer = usuario.Reestablecer,
                             FechaRegistro = DateTime.Now
                         };
@@ -80,7 +80,7 @@ namespace CapaDatos
                         db.SaveChanges(); // Guarda los cambios en la base de datos
 
                         response.success = true;
-                        response.mensaje = "Se ha creado el usuario correctamente";
+                        response.message = "Se ha creado el usuario correctamente";
                     }
                 }
                 return response; // La operación fue exitosa
@@ -89,7 +89,7 @@ namespace CapaDatos
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
                 response.success = false;
-                response.mensaje = "Ha ocurrido un error: " + ex.Message;
+                response.message = "Ha ocurrido un error: " + ex.Message;
 
                 return response;
             }
@@ -114,13 +114,13 @@ namespace CapaDatos
 
                         db.SaveChanges(); // Guarda los cambios en la base de datos
                         response.success = true;
-                        response.mensaje = "Se ha actualizado correctamente";
+                        response.message = "Se ha actualizado correctamente";
                         return response; // La operación fue exitosa
                     }
                     else
                     {
                         response.success = false;
-                        response.mensaje = "No se encontró el usuario";
+                        response.message = "No se encontró el usuario";
                         return response;
                     }
                 }
@@ -128,7 +128,7 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
-                response.mensaje = "Ha ocurrido un error " + ex.Message;
+                response.message = "Ha ocurrido un error " + ex.Message;
                 return response; // Ocurrió un error
             }
         }
@@ -154,6 +154,52 @@ namespace CapaDatos
                 Console.WriteLine("An error occurred: " + ex.Message);
                 return false;
             }
+        }
+
+        public Response EliminarDeseo(int idUsuario, int idProducto)
+        {
+            Response response = new Response();
+
+
+            try
+            {
+                using (DBCARRITOEntities db = new DBCARRITOEntities())
+                {
+                    
+                    var usuario = db.USUARIO.Find(idUsuario);
+
+                    if (usuario == null)
+                    {
+                        response.success = false;
+                        response.message = "Usuario no encontrado.";
+                        return response;
+                    }
+
+                    // Encuentra el producto en la lista de deseos del usuario
+                    var deseo = db.DESEOS.FirstOrDefault(d => d.usuarioID == idUsuario && d.productoID == idProducto);
+
+                    if (deseo == null)
+                    {
+                        response.success = false;
+                        response.message = "Producto no encontrado en la lista de deseos.";
+                        return response;
+                    }
+
+                    
+                    db.DESEOS.Remove(deseo);
+                    db.SaveChanges();
+
+                    response.success = true;
+                    response.message = "Producto eliminado correctamente.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = $"Error al eliminar el producto: {ex.Message}";
+            }
+
+            return response;
         }
     }
 }

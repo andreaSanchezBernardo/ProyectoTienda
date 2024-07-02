@@ -51,12 +51,12 @@ namespace CapaTienda.Controllers
             {
                 Session["UserId"] = usuario.IdUsuario;
                 response.success = true;
-                response.mensaje = "Autenticación exitosa";
+                response.message = "Autenticación exitosa";
             }
             else
             {
                 response.success = false;
-                response.mensaje = "Error en el tipo de datos retornado.";
+                response.message = "Usuario o contraseña inválidos.";
             }
 
             return Json(response);

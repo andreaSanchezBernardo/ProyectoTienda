@@ -3,6 +3,54 @@
     ViewBag.Title = "IniciarSesion";
     Layout = "~/Views/Shared/_LayoutRegistro.cshtml";
 }
+<style>
+
+    .alert-success {
+        border-radius: 10px;
+        width: 650px;
+        height: 200px;
+        transform: translate(-50%, -50%);
+        background-color: #D4EFDF;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: none;
+    }
+
+        .alert-success p {
+            font-size: 25px;
+            text-align: center;
+            padding-top: 15px;
+            color: #196F3D;
+        }
+
+    .alert-heading {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-radius: 10px;
+        font-size: 35px;
+        text-align: center;
+        background-color: #D4EFDF;
+        color: #196F3D;
+    }
+    .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        border: 0.25em solid currentColor;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spinner-border .75s linear infinite;
+    }
+</style>
+
 
 <div class="loodo">
     <img src="~/iconos/libro.png" />
@@ -18,7 +66,7 @@
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre" class="in" required />
         <label for="apellido">Apellido</label>
-        <input type="text" name="apelllido" id="apellido" class="in" required />
+        <input type="text" name="apellido" id="apellido" class="in" required />
         <label for="email">Email</label>
         <input type="text" name="email" id="email" class="in" required />
         <label for="clave">Contraseña</label>
@@ -37,6 +85,22 @@
     </form>
 </div>
 
+<!-- Modal de alerta  -->
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">¡Genial!</h4>
+    <p>¡Nuevo Usuario Creado Correctamente!</p>
+    <br />
+    <p>En unos segundos sera reedirigido a la pagina de Inicio.</p>
+</div>
+
+<!-- Spinner de carga -->
+<div id="spinner" class="spinner" hidden>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+
 @section scripts
     {
     <script>
@@ -44,7 +108,7 @@
             $('#fr').on('submit', function (event) {
                 event.preventDefault();// Evita el comportamiento por defecto del formulario
 
-                const idUsuario = $('#idUsuario').val(); // Si tienes un campo de IdUsuario
+                const idUsuario = $('#usuarioId').val(); // Si tienes un campo de IdUsuario
                 const nombre = $('#nombre').val();
                 const apellido = $('#apellido').val();
                 const email = $('#email').val();
@@ -72,6 +136,7 @@
 
                 };
 
+                $('#spinner').show();
                 // Realiza la solicitud AJAX
 
                 var url = '@Url.Action("AgregarUsuario", "Tienda")';
@@ -81,11 +146,15 @@
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
                     success: function (response) {
-                        // Maneja la respuesta del servidor
-                        alert(response.mensaje);
-                        window.location.href = '@Url.Action("Index", "Tienda")';
+                        $('#spinner').hide();
+                        $('.alert').show();
+
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Inicio", "Tienda")';
+                        }, 4000);
                     },
                     error: function (error) {
+                        $('#spinner').hide();
                         // Maneja los errores
                         alert(response.mensaje);
                     }
